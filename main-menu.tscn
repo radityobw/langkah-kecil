@@ -1,0 +1,173 @@
+[gd_scene load_steps=26 format=3 uid="uid://4v0bxobq1yjp"]
+
+[ext_resource type="Script" uid="uid://dttcax0swasvs" path="res://main_menu.gd" id="1_j3jwc"]
+[ext_resource type="Texture2D" uid="uid://dyaghlpxa838g" path="res://FreeGUI/png/BG.png" id="2_j3jwc"]
+[ext_resource type="Texture2D" uid="uid://s1suf4xyt0p3" path="res://FreeGUI/png/Button.png" id="3_holw3"]
+[ext_resource type="FontFile" uid="uid://cxh88to8mitlu" path="res://brady_bunch/BradBunR.ttf" id="3_mue8r"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j3jwc"]
+texture = ExtResource("2_j3jwc")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikcl0"]
+atlas = ExtResource("3_holw3")
+region = Rect2(197, 972, 181, 190)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_holw3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ikcl0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52n7k"]
+atlas = ExtResource("3_holw3")
+region = Rect2(197, 972, 181, 190)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ank1t"]
+texture = SubResource("AtlasTexture_52n7k")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5x8rc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_holw3"]
+atlas = ExtResource("3_holw3")
+region = Rect2(3297, 319, 181, 189)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_52n7k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ank1t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5x8rc"]
+atlas = ExtResource("3_holw3")
+region = Rect2(3297, 319, 181, 189)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_52n7k"]
+texture = SubResource("AtlasTexture_5x8rc")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gck0f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gvk52"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljn4s"]
+atlas = ExtResource("3_holw3")
+region = Rect2(2557, 1408, 181, 190)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w8h0y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_if514"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8h0y"]
+atlas = ExtResource("3_holw3")
+region = Rect2(2557, 1408, 181, 190)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5x8rc"]
+texture = SubResource("AtlasTexture_w8h0y")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_upudm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crh45"]
+
+[node name="Main-menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j3jwc")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_j3jwc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -363.0
+offset_top = -319.0
+offset_right = 363.0
+offset_bottom = -142.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_mue8r")
+theme_override_font_sizes/font_size = 150
+text = "Langkah Kecil"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.5
+offset_top = -51.0
+offset_right = 275.5
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_icons/icon = SubResource("AtlasTexture_ikcl0")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_holw3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ikcl0")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ank1t")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5x8rc")
+
+[node name="Button2" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_icons/icon = SubResource("AtlasTexture_holw3")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_52n7k")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ank1t")
+theme_override_styles/hover = SubResource("StyleBoxTexture_52n7k")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gck0f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gvk52")
+
+[node name="Button3" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_icons/icon = SubResource("AtlasTexture_ljn4s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w8h0y")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_if514")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5x8rc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_upudm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_crh45")
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="HBoxContainer/Button3" to="." method="_on_exit_pressed"]
