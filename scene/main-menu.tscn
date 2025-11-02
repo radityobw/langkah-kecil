@@ -112,6 +112,23 @@ theme_override_fonts/font = ExtResource("3_4be4o")
 theme_override_font_sizes/font_size = 150
 text = "Langkah Kecil"
 
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 676.0
+offset_top = 730.5
+offset_right = 1402.0
+offset_bottom = 907.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_4be4o")
+theme_override_font_sizes/font_size = 30
+text = "Copyright © 2025 Kazahana. All rights reserved"
+
 [node name="Parallax2D" type="Parallax2D" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Parallax2D"]

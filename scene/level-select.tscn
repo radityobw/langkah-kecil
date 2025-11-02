@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://peahobrq6jl2"]
+[gd_scene load_steps=20 format=3 uid="uid://peahobrq6jl2"]
 
 [ext_resource type="Script" uid="uid://cso3d41pjfaee" path="res://script/level_select.gd" id="1_f8mdw"]
 [ext_resource type="Texture2D" uid="uid://dyaghlpxa838g" path="res://assets/FreeGUI/png/BG.png" id="2_ajvc4"]
@@ -6,8 +6,9 @@
 [ext_resource type="FontFile" uid="uid://cxh88to8mitlu" path="res://assets/brady_bunch/BradBunR.ttf" id="4_1m5pn"]
 [ext_resource type="Texture2D" uid="uid://s1suf4xyt0p3" path="res://assets/FreeGUI/png/Button.png" id="5_wtyro"]
 [ext_resource type="PackedScene" uid="uid://dp5ennbbw03t6" path="res://scene/level-button.tscn" id="6_p4j5i"]
-[ext_resource type="Texture2D" uid="uid://conxi0ejnrohs" path="res://z-another/bahlililil.jpg" id="7_ajvc4"]
+[ext_resource type="Texture2D" uid="uid://b5cbm66ott1pe" path="res://assets/belajar.jpeg" id="7_1m5pn"]
 [ext_resource type="Script" uid="uid://cqsh6jlmhwy8y" path="res://scene/parallax_background.gd" id="8_oy5py"]
+[ext_resource type="Texture2D" uid="uid://6blhysktenng" path="res://assets/senyum.jpeg" id="8_wtyro"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b362m"]
 
@@ -37,7 +38,10 @@ expand_margin_bottom = 2.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ajvc4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oy5py"]
-texture = ExtResource("7_ajvc4")
+texture = ExtResource("7_1m5pn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p4j5i"]
+texture = ExtResource("8_wtyro")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -169,6 +173,22 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_sw5pt")
 theme_override_styles/hover = SubResource("StyleBoxTexture_pqee4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ajvc4")
 
+[node name="Panel3" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 733.0
+offset_top = 400.0
+offset_right = 1133.0
+offset_bottom = 700.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_oy5py")
+
+[node name="Panel4" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1259.0
+offset_top = 400.0
+offset_right = 1659.0
+offset_bottom = 700.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_p4j5i")
+
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -233,22 +253,6 @@ theme_override_fonts/font = ExtResource("4_1m5pn")
 theme_override_font_sizes/font_size = 50
 text = " Mengenal Emosi Anak"
 horizontal_alignment = 1
-
-[node name="Panel3" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 730.0
-offset_top = 375.0
-offset_right = 1130.0
-offset_bottom = 675.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_oy5py")
-
-[node name="Panel4" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 1261.0
-offset_top = 375.0
-offset_right = 1661.0
-offset_bottom = 675.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_oy5py")
 
 [connection signal="pressed" from="Home" to="." method="_on_home_pressed"]
 [connection signal="pressed" from="GridContainer/TextureButton" to="." method="lv1_on_pressed"]
