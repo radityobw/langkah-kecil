@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://del6lskve8oqh"
+path="res://.godot/imported/Wallpaper - Kevin Macleod.mp3-42056f743f8f273fd4c2f95b33f26b2b.mp3str"
+
+[deps]
+
+source_file="res://z-another/Wallpaper - Kevin Macleod.mp3"
+dest_files=["res://.godot/imported/Wallpaper - Kevin Macleod.mp3-42056f743f8f273fd4c2f95b33f26b2b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

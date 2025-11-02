@@ -18,7 +18,8 @@ config/icon="uid://conxi0ejnrohs"
 
 [autoload]
 
-Backsound="*res://backsound.tscn"
+Backsound="*res://scene/backsound.tscn"
+SelectSfx="*res://scene/select-sfx.tscn"
 
 [display]
 
