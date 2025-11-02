@@ -29,3 +29,21 @@ func _on_exit_pressed() -> void:
 	SelectSfx.play()
 	await get_tree().create_timer(0.25).timeout
 	get_tree().quit()
+
+
+@onready var fade = $Fade
+
+func _ready() -> void:
+	# Pastikan fade di atas dan menutupi layar penuh
+	fade.modulate.a = 1.0
+	fade.mouse_filter = Control.MOUSE_FILTER_STOP  # tangkap input sementara
+	
+	# Buat tween fade-in
+	var tween = create_tween()
+	tween.tween_property(fade, "modulate:a", 0.0, 1.0)  # durasi 1 detik
+	
+	await tween.finished
+	
+	# Setelah fade selesai, pastikan tombol bisa diklik
+	fade.mouse_filter = Control.MOUSE_FILTER_IGNORE  # lewati input
+	fade.visible = false  # opsional, agar hilang sepenuhnya dari layar

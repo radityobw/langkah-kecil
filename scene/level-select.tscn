@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://peahobrq6jl2"]
+[gd_scene load_steps=18 format=3 uid="uid://peahobrq6jl2"]
 
 [ext_resource type="Script" uid="uid://cso3d41pjfaee" path="res://script/level_select.gd" id="1_f8mdw"]
 [ext_resource type="Texture2D" uid="uid://dyaghlpxa838g" path="res://assets/FreeGUI/png/BG.png" id="2_ajvc4"]
@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://s1suf4xyt0p3" path="res://assets/FreeGUI/png/Button.png" id="5_wtyro"]
 [ext_resource type="PackedScene" uid="uid://dp5ennbbw03t6" path="res://scene/level-button.tscn" id="6_p4j5i"]
 [ext_resource type="Texture2D" uid="uid://conxi0ejnrohs" path="res://z-another/bahlililil.jpg" id="7_ajvc4"]
+[ext_resource type="Script" uid="uid://cqsh6jlmhwy8y" path="res://scene/parallax_background.gd" id="8_oy5py"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b362m"]
-texture = ExtResource("2_ajvc4")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ny0sn"]
 atlas = ExtResource("3_oy5py")
@@ -47,6 +47,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f8mdw")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Parallax2D"]
+script = ExtResource("8_oy5py")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Parallax2D/ParallaxBackground"]
+motion_mirroring = Vector2(2400, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D/ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+position = Vector2(1213.0001, 541.5)
+scale = Vector2(0.8046667, 0.60611105)
+texture = ExtResource("2_ajvc4")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -142,7 +156,7 @@ offset_right = 1410.0
 offset_bottom = 228.0
 theme_override_fonts/font = ExtResource("4_1m5pn")
 theme_override_font_sizes/font_size = 100
-text = "Pilih Kegiatan"
+text = "Pilih Mode"
 horizontal_alignment = 1
 
 [node name="Home" type="Button" parent="."]

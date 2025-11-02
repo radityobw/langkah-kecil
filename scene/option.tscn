@@ -1,14 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://ct7kqo4je8hmy"]
+[gd_scene load_steps=16 format=3 uid="uid://ct7kqo4je8hmy"]
 
 [ext_resource type="Script" uid="uid://by5ru8111c1hr" path="res://script/option.gd" id="1_lkh8f"]
+[ext_resource type="Script" uid="uid://cqsh6jlmhwy8y" path="res://scene/parallax_background.gd" id="2_70qle"]
 [ext_resource type="Texture2D" uid="uid://dyaghlpxa838g" path="res://assets/FreeGUI/png/BG.png" id="2_i838a"]
 [ext_resource type="Texture2D" uid="uid://do47lnvlxitg4" path="res://assets/FreeGUI/png/Window.png" id="3_70qle"]
 [ext_resource type="FontFile" uid="uid://cxh88to8mitlu" path="res://assets/brady_bunch/BradBunR.ttf" id="4_fyn3v"]
 [ext_resource type="Texture2D" uid="uid://s1suf4xyt0p3" path="res://assets/FreeGUI/png/Button.png" id="5_trtje"]
 [ext_resource type="PackedScene" uid="uid://fjjrd1pceqkw" path="res://scene/music-button.tscn" id="6_22n8n"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_piv12"]
-texture = ExtResource("2_i838a")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fyn3v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4nvuw"]
 atlas = ExtResource("3_70qle")
@@ -44,6 +44,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lkh8f")
 
+[node name="Parallax2D" type="Parallax2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Parallax2D"]
+script = ExtResource("2_70qle")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Parallax2D/ParallaxBackground"]
+motion_mirroring = Vector2(2400, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D/ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+position = Vector2(1213.0001, 541.5)
+scale = Vector2(0.8046667, 0.60611105)
+texture = ExtResource("2_i838a")
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -51,7 +65,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_piv12")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fyn3v")
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
 _import_path = NodePath("")

@@ -14,7 +14,8 @@ config/name="Langkah Kecil"
 run/main_scene="uid://4v0bxobq1yjp"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="uid://conxi0ejnrohs"
+boot_splash/image="uid://bqapn08cx85e1"
+config/icon="uid://bjiq7p8o703b2"
 
 [autoload]
 
@@ -28,6 +29,11 @@ window/size/viewport_height=1080
 window/size/mode=3
 window/size/window_width_override=2400
 window/size/window_height_override=1080
+window/stretch/mode="canvas_items"
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
