@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bcd1memgt7wdm"
+path="res://.godot/imported/Wallpaper - Kevin Macleod.wav-f347284a1d8d182dcc5f603eac8c0c4b.sample"
+
+[deps]
+
+source_file="res://assets/music/Wallpaper - Kevin Macleod.wav"
+dest_files=["res://.godot/imported/Wallpaper - Kevin Macleod.wav-f347284a1d8d182dcc5f603eac8c0c4b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,13 +1,18 @@
-[gd_scene load_steps=27 format=3 uid="uid://4v0bxobq1yjp"]
+[gd_scene load_steps=30 format=3 uid="uid://4v0bxobq1yjp"]
 
 [ext_resource type="Script" uid="uid://dttcax0swasvs" path="res://script/main_menu.gd" id="1_4jkfy"]
 [ext_resource type="Texture2D" uid="uid://dyaghlpxa838g" path="res://assets/FreeGUI/png/BG.png" id="2_85jwq"]
 [ext_resource type="FontFile" uid="uid://cxh88to8mitlu" path="res://assets/brady_bunch/BradBunR.ttf" id="3_4be4o"]
-[ext_resource type="Script" uid="uid://cqsh6jlmhwy8y" path="res://scene/parallax_background.gd" id="4_85jwq"]
+[ext_resource type="Script" uid="uid://cqsh6jlmhwy8y" path="res://script/parallax_background.gd" id="4_85jwq"]
 [ext_resource type="Texture2D" uid="uid://s1suf4xyt0p3" path="res://assets/FreeGUI/png/Button.png" id="4_ogt8j"]
+[ext_resource type="Texture2D" uid="uid://diowur4k2ai5d" path="res://assets/picture/langakah kecil no bg.png" id="6_4be4o"]
+[ext_resource type="Script" uid="uid://v5aj7u1afy83" path="res://addons/NotificationPlugin/main.gd" id="7_ogt8j"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j3jwc"]
 texture = ExtResource("2_85jwq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ogt8j"]
+texture = ExtResource("6_4be4o")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ikcl0"]
 atlas = ExtResource("4_ogt8j")
@@ -85,6 +90,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4jkfy")
 
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 676.0
+offset_top = 500.0
+offset_right = 1402.0
+offset_bottom = 677.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_4be4o")
+theme_override_font_sizes/font_size = 30
+text = "Copyright © 2025 Kazahana. All rights reserved"
+
 [node name="Panel" type="Panel" parent="."]
 visible = false
 layout_mode = 1
@@ -96,6 +118,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_j3jwc")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -112,23 +135,6 @@ theme_override_fonts/font = ExtResource("3_4be4o")
 theme_override_font_sizes/font_size = 150
 text = "Langkah Kecil"
 
-[node name="Label" type="Label" parent="Label"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 676.0
-offset_top = 730.5
-offset_right = 1402.0
-offset_bottom = 907.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_4be4o")
-theme_override_font_sizes/font_size = 30
-text = "Copyright © 2025 Kazahana. All rights reserved"
-
 [node name="Parallax2D" type="Parallax2D" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Parallax2D"]
@@ -143,6 +149,21 @@ position = Vector2(1213.0001, 541.5)
 scale = Vector2(0.8046667, 0.60611105)
 texture = ExtResource("2_85jwq")
 
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -679.5
+offset_top = -816.0
+offset_right = 679.5
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ogt8j")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -151,9 +172,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -275.5
-offset_top = -51.0
+offset_top = -1.0
 offset_right = 275.5
-offset_bottom = 139.0
+offset_bottom = 189.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -210,6 +231,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="NotificationManager" type="Node" parent="."]
+script = ExtResource("7_ogt8j")
+metadata/_custom_type_script = "uid://v5aj7u1afy83"
 
 [connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_option_pressed"]

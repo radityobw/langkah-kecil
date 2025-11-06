@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://d16bqtxymgfds"]
 
-[ext_resource type="AudioStream" uid="uid://del6lskve8oqh" path="res://z-another/Wallpaper - Kevin Macleod.mp3" id="1_v2wlm"]
-[ext_resource type="Script" uid="uid://c7dlx4dbhhecy" path="res://scene/backsound.gd" id="2_05ji2"]
+[ext_resource type="AudioStream" uid="uid://del6lskve8oqh" path="res://assets/music/Wallpaper - Kevin Macleod.mp3" id="1_v2wlm"]
+[ext_resource type="Script" uid="uid://c7dlx4dbhhecy" path="res://script/backsound.gd" id="2_05ji2"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 unique_name_in_owner = true
 stream = ExtResource("1_v2wlm")
-volume_db = 20.971
+volume_db = 18.0
 autoplay = true
 script = ExtResource("2_05ji2")
 

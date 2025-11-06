@@ -14,13 +14,15 @@ config/name="Langkah Kecil"
 run/main_scene="uid://4v0bxobq1yjp"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/image="uid://bqapn08cx85e1"
-config/icon="uid://ih6kbydystac"
+boot_splash/image="uid://dfitmw0pi2y2f"
+config/icon="uid://3k3d0wbnb1y5"
+config/image="uid://dfitmw0pi2y2f"
 
 [autoload]
 
 Backsound="*res://scene/backsound.tscn"
 SelectSfx="*res://scene/select-sfx.tscn"
+RyoLocalNotifPlugin="*res://addons/RyoLocalNotifPlugin/RyoLocalNotifPluginRuntime.gd"
 
 [display]
 
@@ -30,6 +32,10 @@ window/size/mode=3
 window/size/window_width_override=2400
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/NotificationPlugin/plugin.cfg", "res://addons/ryolocalnotifplugin/plugin.cfg", "res://addons/utilsgodot/plugin.cfg")
 
 [input_devices]
 

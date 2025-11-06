@@ -1,10 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjemgs8iqwfwu"]
+[gd_scene load_steps=28 format=3 uid="uid://cjemgs8iqwfwu"]
 
-[ext_resource type="Script" uid="uid://dfkobbirkb5f6" path="res://scene/lv_1.gd" id="1_lrlda"]
+[ext_resource type="Script" uid="uid://b1dv5aax46qlh" path="res://script/lv_2.gd" id="1_lrlda"]
 [ext_resource type="Texture2D" uid="uid://dyaghlpxa838g" path="res://assets/FreeGUI/png/BG.png" id="2_5r08s"]
 [ext_resource type="Texture2D" uid="uid://do47lnvlxitg4" path="res://assets/FreeGUI/png/Window.png" id="3_s01qq"]
 [ext_resource type="Texture2D" uid="uid://s1suf4xyt0p3" path="res://assets/FreeGUI/png/Button.png" id="4_exahv"]
 [ext_resource type="FontFile" uid="uid://cxh88to8mitlu" path="res://assets/brady_bunch/BradBunR.ttf" id="5_qxwgp"]
+[ext_resource type="PackedScene" uid="uid://dwpr14r382rxj" path="res://scene/notdragndrop.tscn" id="6_i5v5w"]
+[ext_resource type="Texture2D" uid="uid://dj2wu2w0frmtp" path="res://assets/picture/EkspresiBahagia.png" id="7_n321l"]
+[ext_resource type="Texture2D" uid="uid://bcvi7pq7v25hq" path="res://assets/picture/EkspresiMarah.png" id="8_toxuh"]
+[ext_resource type="Texture2D" uid="uid://wvy58a8whnql" path="res://assets/picture/EkspresiSedih.png" id="9_jtmos"]
+[ext_resource type="Texture2D" uid="uid://dirnh5xmvu5v5" path="res://assets/picture/EkspresiTerkejut.png" id="10_q3hvn"]
+[ext_resource type="Texture2D" uid="uid://b7rpb7xipyfi4" path="res://assets/picture/EkspresiMalu.png" id="11_hm2al"]
+[ext_resource type="Texture2D" uid="uid://ci46c01jtrbyd" path="res://assets/picture/EkspresiTakut.png" id="12_m3wm1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sfmxr"]
 texture = ExtResource("2_5r08s")
@@ -21,12 +28,12 @@ region = Rect2(606, 2716, 181, 189)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nsr13"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sw5pt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5r08s"]
 atlas = ExtResource("4_exahv")
 region = Rect2(1551, 972, 181, 190)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ffkix"]
-texture = SubResource("AtlasTexture_sw5pt")
+texture = SubResource("AtlasTexture_5r08s")
 expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
@@ -37,6 +44,20 @@ expand_margin_bottom = 2.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_mr52l"]
 atlas = ExtResource("3_s01qq")
 region = Rect2(2150, 37, 703, 183)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrlda"]
+atlas = ExtResource("4_exahv")
+region = Rect2(173, 433, 425, 189)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5r08s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s01qq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_exahv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qxwgp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0fic4"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -57,81 +78,13 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_sfmxr")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 2
-auto_translate_mode = 0
-editor_description = ""
-visible = true
-modulate = Color(1, 1, 1, 1)
-self_modulate = Color(1, 1, 1, 1)
-show_behind_parent = false
-top_level = false
-clip_children = 0
-light_mask = 1
-visibility_layer = 1
-z_index = 0
-z_as_relative = true
-y_sort_enabled = false
-texture_filter = 0
-texture_repeat = 0
-material = null
-use_parent_material = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 0)
-layout_direction = 0
 layout_mode = 1
 anchors_preset = 15
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 0.0
-scale = Vector2(1, 1)
-pivot_offset = Vector2(0, 0)
-size_flags_horizontal = 1
-size_flags_vertical = 1
-size_flags_stretch_ratio = 1.0
-localize_numeral_system = true
-tooltip_text = ""
-tooltip_auto_translate_mode = 0
-focus_neighbor_left = NodePath("")
-focus_neighbor_top = NodePath("")
-focus_neighbor_right = NodePath("")
-focus_neighbor_bottom = NodePath("")
-focus_next = NodePath("")
-focus_previous = NodePath("")
-focus_mode = 0
-focus_behavior_recursive = 0
-mouse_filter = 1
-mouse_behavior_recursive = 0
-mouse_force_pass_scroll_events = true
-mouse_default_cursor_shape = 0
-accessibility_name = ""
-accessibility_description = ""
-accessibility_live = 0
-accessibility_controls_nodes = Array[NodePath]([])
-accessibility_described_by_nodes = Array[NodePath]([])
-accessibility_labeled_by_nodes = Array[NodePath]([])
-accessibility_flow_to_nodes = Array[NodePath]([])
-theme = null
-theme_type_variation = &""
 texture = SubResource("AtlasTexture_1ledt")
-expand_mode = 0
-stretch_mode = 0
-flip_h = false
-flip_v = false
-script = null
 
 [node name="Home" type="Button" parent="TextureRect"]
 layout_mode = 0
@@ -146,81 +99,15 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_ffkix")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_y2qch")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 2
-auto_translate_mode = 0
-editor_description = ""
-visible = true
-modulate = Color(1, 1, 1, 1)
-self_modulate = Color(1, 1, 1, 1)
-show_behind_parent = false
-top_level = false
-clip_children = 0
-light_mask = 1
-visibility_layer = 1
-z_index = 0
-z_as_relative = true
-y_sort_enabled = false
-texture_filter = 0
-texture_repeat = 0
-material = null
-use_parent_material = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 0)
-layout_direction = 0
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.0
 anchor_right = 0.5
-anchor_bottom = 0.0
 offset_left = -351.5
-offset_top = 0.0
 offset_right = 351.5
 offset_bottom = 275.0
 grow_horizontal = 2
-grow_vertical = 1
-rotation = 0.0
-scale = Vector2(1, 1)
-pivot_offset = Vector2(0, 0)
-size_flags_horizontal = 1
-size_flags_vertical = 1
-size_flags_stretch_ratio = 1.0
-localize_numeral_system = true
-tooltip_text = ""
-tooltip_auto_translate_mode = 0
-focus_neighbor_left = NodePath("")
-focus_neighbor_top = NodePath("")
-focus_neighbor_right = NodePath("")
-focus_neighbor_bottom = NodePath("")
-focus_next = NodePath("")
-focus_previous = NodePath("")
-focus_mode = 0
-focus_behavior_recursive = 0
-mouse_filter = 1
-mouse_behavior_recursive = 0
-mouse_force_pass_scroll_events = true
-mouse_default_cursor_shape = 0
-accessibility_name = ""
-accessibility_description = ""
-accessibility_live = 0
-accessibility_controls_nodes = Array[NodePath]([])
-accessibility_described_by_nodes = Array[NodePath]([])
-accessibility_labeled_by_nodes = Array[NodePath]([])
-accessibility_flow_to_nodes = Array[NodePath]([])
-theme = null
-theme_type_variation = &""
 texture = SubResource("AtlasTexture_mr52l")
-expand_mode = 0
-stretch_mode = 0
-flip_h = false
-flip_v = false
-script = null
 
 [node name="Label" type="Label" parent="TextureRect2"]
 layout_mode = 1
@@ -230,7 +117,7 @@ anchor_bottom = 1.0
 offset_left = 0.5
 offset_top = 50.0
 offset_right = 0.5
-offset_bottom = 50.0
+offset_bottom = -153.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("5_qxwgp")
@@ -238,4 +125,209 @@ theme_override_font_sizes/font_size = 60
 text = "Mengenal Emosi Anak"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="TextureRect/Home" to="." method="_on_home_pressed"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -855.5
+offset_top = -95.0
+offset_right = 855.5
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 120
+
+[node name="TextureRect3" parent="HBoxContainer2" instance=ExtResource("6_i5v5w")]
+layout_mode = 2
+texture = ExtResource("7_n321l")
+
+[node name="TextureRect4" parent="HBoxContainer2" instance=ExtResource("6_i5v5w")]
+layout_mode = 2
+texture = ExtResource("8_toxuh")
+
+[node name="TextureRect5" parent="HBoxContainer2" instance=ExtResource("6_i5v5w")]
+layout_mode = 2
+texture = ExtResource("9_jtmos")
+
+[node name="TextureRect6" parent="HBoxContainer2" instance=ExtResource("6_i5v5w")]
+layout_mode = 2
+texture = ExtResource("10_q3hvn")
+
+[node name="TextureRect7" parent="HBoxContainer2" instance=ExtResource("6_i5v5w")]
+layout_mode = 2
+texture = ExtResource("11_hm2al")
+
+[node name="TextureRect8" parent="HBoxContainer2" instance=ExtResource("6_i5v5w")]
+layout_mode = 2
+texture = ExtResource("12_m3wm1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -855.0
+offset_top = -463.0
+offset_right = 845.0
+offset_bottom = -263.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="SenangBtn" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_icons/icon = SubResource("AtlasTexture_lrlda")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5r08s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s01qq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_exahv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qxwgp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0fic4")
+expand_icon = true
+
+[node name="Label" type="Label" parent="HBoxContainer/SenangBtn"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 49.0
+offset_right = 201.0
+offset_bottom = 133.0
+theme_override_fonts/font = ExtResource("5_qxwgp")
+theme_override_font_sizes/font_size = 50
+text = "Senang"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarahBtn" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_icons/icon = SubResource("AtlasTexture_lrlda")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5r08s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s01qq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_exahv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qxwgp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0fic4")
+expand_icon = true
+
+[node name="Label" type="Label" parent="HBoxContainer/MarahBtn"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 49.0
+offset_right = 201.0
+offset_bottom = 133.0
+theme_override_fonts/font = ExtResource("5_qxwgp")
+theme_override_font_sizes/font_size = 50
+text = "Marah"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="SedihBtn" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_icons/icon = SubResource("AtlasTexture_lrlda")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5r08s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s01qq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_exahv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qxwgp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0fic4")
+expand_icon = true
+
+[node name="Label" type="Label" parent="HBoxContainer/SedihBtn"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 49.0
+offset_right = 201.0
+offset_bottom = 133.0
+theme_override_fonts/font = ExtResource("5_qxwgp")
+theme_override_font_sizes/font_size = 50
+text = "Sedih"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TerkejutBtn" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_icons/icon = SubResource("AtlasTexture_lrlda")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5r08s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s01qq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_exahv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qxwgp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0fic4")
+expand_icon = true
+
+[node name="Label" type="Label" parent="HBoxContainer/TerkejutBtn"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 49.0
+offset_right = 201.0
+offset_bottom = 133.0
+theme_override_fonts/font = ExtResource("5_qxwgp")
+theme_override_font_sizes/font_size = 50
+text = "Terkejut"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MaluBtn" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_icons/icon = SubResource("AtlasTexture_lrlda")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5r08s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s01qq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_exahv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qxwgp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0fic4")
+expand_icon = true
+
+[node name="Label" type="Label" parent="HBoxContainer/MaluBtn"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 49.0
+offset_right = 201.0
+offset_bottom = 133.0
+theme_override_fonts/font = ExtResource("5_qxwgp")
+theme_override_font_sizes/font_size = 50
+text = "Malu"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TakutBtn" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_icons/icon = SubResource("AtlasTexture_lrlda")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5r08s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s01qq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_exahv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qxwgp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0fic4")
+expand_icon = true
+
+[node name="Label" type="Label" parent="HBoxContainer/TakutBtn"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 49.0
+offset_right = 201.0
+offset_bottom = 133.0
+theme_override_fonts/font = ExtResource("5_qxwgp")
+theme_override_font_sizes/font_size = 50
+text = "Takut"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="TextureRect/Home" to="." method="_on_backlv2_pressed"]
+[connection signal="pressed" from="HBoxContainer/SenangBtn" to="." method="_on_senang_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarahBtn" to="." method="_on_marah_pressed"]
+[connection signal="pressed" from="HBoxContainer/SedihBtn" to="." method="_on_sedih_pressed"]
+[connection signal="pressed" from="HBoxContainer/TerkejutBtn" to="." method="_on_terkejut_pressed"]
+[connection signal="pressed" from="HBoxContainer/MaluBtn" to="." method="_on_malu_pressed"]
+[connection signal="pressed" from="HBoxContainer/TakutBtn" to="." method="_on_takut_pressed"]
