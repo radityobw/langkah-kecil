@@ -87,9 +87,12 @@ Jika kamu ingin membantu mengembangkan fitur, memperbaiki bug, atau menambah kon
 ---
 
 ## 📜 Lisensi
+Proyek ini menggunakan lisensi **Custom CC BY-NC 4.0 + Contributor Terms**.  
+- Penggunaan pribadi dan edukatif diperbolehkan.  
+- Kontribusi terbuka diterima dengan atribusi penuh.  
+- Penggunaan komersial, distribusi berbayar, atau penjualan dilarang tanpa izin tertulis.  
 
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
-Silakan digunakan, dimodifikasi, dan dikembangkan dengan tetap menghormati tujuan sosial dan edukatif dari proyek ini.
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
 ---
 
