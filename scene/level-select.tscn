@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://peahobrq6jl2"]
+[gd_scene load_steps=22 format=3 uid="uid://peahobrq6jl2"]
 
 [ext_resource type="Script" uid="uid://cso3d41pjfaee" path="res://script/level_select.gd" id="1_f8mdw"]
 [ext_resource type="Texture2D" uid="uid://dyaghlpxa838g" path="res://assets/FreeGUI/png/BG.png" id="2_ajvc4"]
@@ -43,6 +43,8 @@ texture = ExtResource("8_wtyro")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oy5py"]
 texture = ExtResource("7_1m5pn")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtyro"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -120,7 +122,6 @@ offset_top = 320.0
 offset_right = 1112.0
 offset_bottom = 658.0
 texture = ExtResource("7_1m5pn")
-script = null
 
 [node name="TextureRect2" parent="." instance=ExtResource("7_wtyro")]
 z_index = 1
@@ -130,7 +131,6 @@ offset_top = 324.0
 offset_right = 1639.0
 offset_bottom = 662.0
 texture = ExtResource("8_wtyro")
-script = null
 
 [node name="Panel4" type="Panel" parent="."]
 visible = false
@@ -170,6 +170,7 @@ columns = 2
 [node name="TextureButton" parent="GridContainer" instance=ExtResource("6_p4j5i")]
 z_index = 2
 layout_mode = 2
+texture_pressed = SubResource("AtlasTexture_wtyro")
 stretch_mode = 3
 script = null
 
