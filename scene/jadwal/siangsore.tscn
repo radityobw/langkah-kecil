@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dtdhomnjs6vs4"]
+[gd_scene load_steps=58 format=3 uid="uid://dtdhomnjs6vs4"]
 
 [ext_resource type="Script" uid="uid://dr63vm6jpr37q" path="res://script/jadwal.gd" id="1_r73ru"]
 [ext_resource type="Texture2D" uid="uid://dyaghlpxa838g" path="res://assets/FreeGUI/png/BG.png" id="2_p8qgw"]
@@ -26,6 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://bj2b45l4ujlxd" path="res://scene/jadwal/siangsore/Menyapu.jpg" id="24_kvfvg"]
 [ext_resource type="Texture2D" uid="uid://bd84ed0hhs7eq" path="res://scene/jadwal/siangsore/PulangKeRumah2.jpg" id="25_qh74w"]
 [ext_resource type="Texture2D" uid="uid://cutxpdptljkjc" path="res://scene/jadwal/siangsore/renang.jpg" id="26_nqfv8"]
+[ext_resource type="Texture2D" uid="uid://cnj5sx743t748" path="res://scene/jadwal/siangsore/BERMAINKOMPUTER2.png" id="27_uaeu5"]
+[ext_resource type="Texture2D" uid="uid://vlfbuxp24mqd" path="res://scene/jadwal/siangsore/menontontv2.png" id="28_pf58n"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sfmxr"]
 texture = ExtResource("2_p8qgw")
@@ -443,6 +445,16 @@ script = ExtResource("8_p8qgw")
 [node name="scroll_16" parent="ScrollContainer/VBoxContainer" instance=ExtResource("7_a1itv")]
 layout_mode = 2
 texture = ExtResource("26_nqfv8")
+script = ExtResource("8_p8qgw")
+
+[node name="scroll_17" parent="ScrollContainer/VBoxContainer" instance=ExtResource("7_a1itv")]
+layout_mode = 2
+texture = ExtResource("27_uaeu5")
+script = ExtResource("8_p8qgw")
+
+[node name="scroll_18" parent="ScrollContainer/VBoxContainer" instance=ExtResource("7_a1itv")]
+layout_mode = 2
+texture = ExtResource("28_pf58n")
 script = ExtResource("8_p8qgw")
 
 [node name="openscrollbtn" type="Button" parent="."]
