@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://br6y7nl8p7pr5" path="res://scene/jadwal/malam/MenggosokGigi.png" id="15_x4c6b"]
 [ext_resource type="Texture2D" uid="uid://ru68uc43dwny" path="res://scene/jadwal/malam/MenontonTV.png" id="16_krk2u"]
 [ext_resource type="Texture2D" uid="uid://dgqfuqdgavupx" path="res://scene/jadwal/malam/PergiKeTempatTidur.png" id="17_es80l"]
-[ext_resource type="Texture2D" uid="uid://ccs8wta1hld8j" path="res://scene/jadwal/malam/membacabuku2.png" id="18_wc3hj"]
+[ext_resource type="Texture2D" uid="uid://bl8ojb3b3h68" path="res://scene/jadwal/malam/membacaBuku.png" id="18_wc3hj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4y2wg"]
 texture = ExtResource("2_mokbg")
@@ -393,12 +393,19 @@ layout_mode = 2
 texture = ExtResource("17_es80l")
 script = ExtResource("7_35syr")
 
+[node name="scroll_10" parent="ScrollContainer/VBoxContainer" instance=ExtResource("8_8q12e")]
+layout_mode = 2
+texture = ExtResource("18_wc3hj")
+script = ExtResource("7_35syr")
+
 [node name="scroll_8" parent="ScrollContainer/VBoxContainer" instance=ExtResource("8_8q12e")]
+visible = false
 layout_mode = 2
 texture = ExtResource("18_wc3hj")
 script = ExtResource("7_35syr")
 
 [node name="scroll_9" parent="ScrollContainer/VBoxContainer" instance=ExtResource("8_8q12e")]
+visible = false
 layout_mode = 2
 texture = ExtResource("10_wc3hj")
 script = ExtResource("7_35syr")
