@@ -1,3 +1,16 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Build, release & export artifacts
+build/
+_site/
+*.apk
+*.aab
+*.keystore
+*.jks
+export_credentials.cfg
+
+# Tooling & security scan caches
+__pycache__/
+sidik-results.sarif
