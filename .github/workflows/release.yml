@@ -1,0 +1,110 @@
+name: Release & Export Langkah Kecil
+
+on:
+  release:
+    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Optional existing release tag (e.g., v1.1.0) to attach exported builds and SHA256SUMS.txt"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    name: Export ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.5
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Android Debug APK
+            preset: Android
+            mode: debug
+            dir: android
+            out: build/android/langkah-kecil.apk
+            artifact: langkah-kecil-android
+            archive: langkah-kecil-android.zip
+          - name: Windows Desktop
+            preset: Windows Desktop
+            mode: release
+            dir: windows
+            out: build/windows/LangkahKecil.exe
+            artifact: langkah-kecil-windows
+            archive: langkah-kecil-windows.zip
+          - name: Linux Desktop
+            preset: Linux
+            mode: release
+            dir: linux
+            out: build/linux/LangkahKecil.x86_64
+            artifact: langkah-kecil-linux
+            archive: langkah-kecil-linux.zip
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Prepare Godot Export Templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates ~/.config/godot
+          cp -r /root/.local/share/godot/export_templates/* ~/.local/share/godot/export_templates/
+          cp -r /root/.config/godot/* ~/.config/godot/ || true
+
+      - name: Import Resources & Export ${{ matrix.preset }}
+        run: |
+          mkdir -p "build/${{ matrix.dir }}"
+          godot --headless --path . --import
+          if [ "${{ matrix.mode }}" = "debug" ]; then
+            godot --headless --verbose --path . --export-debug "${{ matrix.preset }}" "${{ matrix.out }}"
+          else
+            godot --headless --verbose --path . --export-release "${{ matrix.preset }}" "${{ matrix.out }}"
+          fi
+
+      - name: Package Export Artifact
+        run: |
+          mkdir -p dist
+          (cd "build/${{ matrix.dir }}" && zip -r "../../dist/${{ matrix.archive }}" .)
+
+      - name: Upload Export Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/${{ matrix.archive }}
+
+  publish:
+    name: Generate Checksums & Upload Release Assets
+    needs: export
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download Export Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: Generate SHA256SUMS.txt
+        run: |
+          cd release-assets
+          sha256sum *.zip > SHA256SUMS.txt
+
+      - name: Attach Assets to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_TAG: ${{ github.event.release.tag_name }}
+          DISPATCH_TAG: ${{ inputs.release_tag }}
+        run: |
+          RELEASE_TAG="${EVENT_TAG:-$DISPATCH_TAG}"
+          if [ -n "$RELEASE_TAG" ]; then
+            gh release upload "$RELEASE_TAG" release-assets/*.zip release-assets/SHA256SUMS.txt --clobber
+          else
+            echo "No release_tag specified on workflow_dispatch; skipping gh release upload."
+          fi

@@ -1,0 +1,77 @@
+name: Langkah Kecil CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate Project Metadata & References
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Project Validator
+        run: python tools/validate_project.py
+
+  sidik-security:
+    name: SIDIK SAST & Secret Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install SIDIK Security Scanner
+        run: |
+          python -m pip install --upgrade pip
+          pip install "sidik>=1.4.0,<2.0.0" || pip install "git+https://github.com/radityobw/SIDIK.git@main"
+
+      - name: Run SIDIK Security Scan
+        run: |
+          sidik --target . --mode all --format github --sarif-output sidik-results.sarif --fail-on high --lang en --quiet
+
+      - name: Upload SIDIK SARIF Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sidik-sarif-report
+          path: sidik-results.sarif
+
+  godot-smoke:
+    name: Godot 4.5 Headless Import & Smoke Test
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Import Godot Resources (Headless)
+        run: godot --headless --path . --import
+
+      - name: Run Headless Smoke Test
+        run: godot --headless --path . --script res://tests/smoke_test.gd
