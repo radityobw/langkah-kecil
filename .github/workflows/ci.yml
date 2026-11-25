@@ -55,7 +55,7 @@ jobs:
 
       - name: Upload SIDIK SARIF Artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sidik-sarif-report
           path: sidik-results.sarif
