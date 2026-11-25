@@ -1,4 +1,6 @@
 *
+!docker/
 !docker/nginx.conf
-!build/web
+!build/
+!build/web/
 !build/web/**
