@@ -1,108 +1,157 @@
+<div align="center">
 
-# 🌱 Langkah Kecil  
-### *"Game edukatif dengan sentuhan emosi dan perhatian untuk setiap anak."*
+  <img src="https://raw.githubusercontent.com/radityobw/langkah-kecil/main/assets/picture/lkk.jpeg" alt="Langkah Kecil Logo" width="140" />
+
+  # 🌱 Langkah Kecil
+  ### *Game Edukatif dengan Sentuhan Emosi dan Perhatian untuk Setiap Anak*
+
+  [![Godot 4.5](https://img.shields.io/badge/Godot-4.5-478CBF?style=for-the-badge&logo=godot-engine&logoColor=white)](https://godotengine.org)
+  [![GitHub Release](https://img.shields.io/github/v/release/radityobw/langkah-kecil?label=Release&color=ea7a2e&style=for-the-badge&cacheSeconds=3600)](https://github.com/radityobw/langkah-kecil/releases/latest)
+  [![CI Status](https://img.shields.io/github/actions/workflow/status/radityobw/langkah-kecil/ci.yml?label=CI&color=2f9e6b&style=for-the-badge)](https://github.com/radityobw/langkah-kecil/actions/workflows/ci.yml)
+  [![Docs](https://img.shields.io/badge/Docs-GitHub_Pages-ea7a2e?style=for-the-badge)](https://radityobw.github.io/langkah-kecil/)
+  [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey?style=for-the-badge)](https://github.com/radityobw/langkah-kecil/blob/main/LICENSE)
+
+  [**Bahasa Indonesia**](#-bahasa-indonesia) • [**English**](#-english) • [**Unduh APK**](#-unduh--instal-apk-android-7) • [**Pengujian**](#-pengujian--validasi-proyek) • [**GitHub Pages**](https://radityobw.github.io/langkah-kecil/)
+
+</div>
 
 ---
 
+# 🇮🇩 Bahasa Indonesia
+
 ## 🎮 Tentang Proyek
 
-**Langkah Kecil** adalah aplikasi permainan edukasi yang dirancang khusus untuk **anak-anak berkebutuhan khusus**, dengan tujuan membantu mereka belajar melalui interaksi yang menyenangkan dan penuh empati.  
-Dikembangkan menggunakan **Godot Engine v4.5**, aplikasi ini menggabungkan permainan, pengenalan emosi, dan manajemen aktivitas harian untuk mendukung perkembangan anak secara menyeluruh.
+**Langkah Kecil** adalah aplikasi permainan edukatif inklusif yang dirancang khusus untuk **anak-anak berkebutuhan khusus**, membantu mereka belajar melalui interaksi yang aman, menyenangkan, dan penuh empati. Dikembangkan menggunakan **Godot Engine 4.5** (*mobile renderer*), aplikasi ini memadukan latihan pengenalan emosi interaktif dengan manajemen jadwal harian visual.
 
 ---
 
 ## ✨ Fitur Utama
 
-- 🧠 **Pengenalan Emosi Interaktif**  
-  Anak belajar mengenali ekspresi wajah dan emosi melalui sistem *feedback* visual dan audio yang lembut serta positif.
-
-- 🗓️ **Jadwal Harian Anak**  
-  Membantu orang tua dan pendidik mengatur rutinitas harian dengan sistem jadwal visual yang mudah dipahami anak.
-
-- 💬 **Feedback Cerdas dan Empatik**  
-  Sistem *real-time feedback* membantu anak memahami tindakan mereka tanpa tekanan — setiap kesalahan adalah kesempatan untuk belajar.
-
-- 🎨 **Desain Ramah Anak**  
-  Antarmuka penuh warna dengan navigasi sederhana, ikon besar, dan efek suara yang lembut untuk menjaga fokus dan kenyamanan.
+- **Pengenalan Emosi Interaktif (`6` Modul):** Anak belajar mengenali ekspresi wajah serta memilih respons tepat untuk emosi **senang**, **sedih**, **marah**, **takut**, **malu**, dan **terkejut** dengan umpan balik (*feedback*) visual dan audio yang lembut.
+- **Jadwal Harian Visual (`Pagi`, `Siang/Sore`, `Malam`):** Membantu orang tua dan pendidik menyusun rutinitas harian melalui kartu aktivitas *drag-and-drop* dengan penyimpanan otomatis lokal (`ConfigFile` di `user://`).
+- **Umpan Balik Empatik:** Respon audio positif dan lembut membantu anak belajar tanpa tekanan: setiap kesalahan adalah kesempatan belajar yang aman.
+- **Desain Ramah Anak:** Antarmuka berwarna hangat dengan tombol besar, navigasi sederhana, pengaturan musik latar opsional, serta dukungan layar sentuh Android maupun desktop.
 
 ---
 
 ## 🧩 Teknologi yang Digunakan
 
-| Komponen                        | Deskripsi                                             |
-|---------------------------------|-------------------------------------------------------|
-| 🎮 **Godot Engine 4.5**        | Game engine utama untuk sistem interaktif dan animasi |
-| 🧱 **GDScript**                | Bahasa pemrograman utama dalam Godot                  |
-| 🎵 **Audio Feedback System**   | Memberikan respon emosi positif dalam game            |
-| 📅 **Custom Schedule Manager** | Fitur untuk mengatur jadwal anak secara visual        |
+| Komponen | Deskripsi |
+|:---|:---|
+| **Godot Engine 4.5** | *Game engine* utama (*Mobile renderer*, resolusi acuan `2400x1080`) |
+| **GDScript** | Bahasa pemrograman skrip untuk navigasi *scene*, *drag-and-drop*, dan *autosave* |
+| **Audio Feedback System** | *Autoload* SFX (`SelectSfx`, `Correctsfx`, `Wrongsfx`) dan musik latar (`Backsound`) |
+| **Automated QA & CI** | Validator Python luring (`validate_project.py`), *headless smoke test* (`smoke_test.gd`), & **SIDIK** |
 
 ---
 
-## 🛠️ Cara Menjalankan Proyek
+## 📱 Unduh & Instal APK (Android 7+)
 
-1. **Clone repositori ini**
+1. Buka halaman [**GitHub Releases**](https://github.com/radityobw/langkah-kecil/releases/latest) dan unduh arsip Android (`langkah-kecil-android.zip`) yang berisi berkas `.apk`.
+2. Ekstrak berkas `.apk` dan pindahkan ke perangkat Android (`Android 7.0 Nougat` atau lebih baru).
+3. Izinkan pemasangan dari sumber tidak dikenal (*Install unknown apps*) pada pengaturan perangkat bila diminta, lalu pasang aplikasi **Langkah Kecil**.
+
+> **Catatan Build Desktop:** *Workflow* rilis juga mendukung ekspor **Windows Desktop** dan **Linux** secara otomatis saat rilis diterbitkan.
+
+---
+
+## 🛠️ Menjalankan dari Sumber (*Source*)
+
+1. **Kloning repositori:**
    ```bash
    git clone https://github.com/radityobw/langkah-kecil.git
    cd langkah-kecil
-
-
-2. **Buka dengan Godot 4.5**
-
-   * Jalankan **Godot Engine 4.5**
-   * Pilih folder proyek ini
-   * Tekan ▶️ *Run Project*
-
-3. **Nikmati pengalaman bermain yang edukatif dan bermakna!**
+   ```
+2. **Buka di Godot Engine 4.5:**
+   - Jalankan **Godot Engine 4.5** dan pilih *Import* pada berkas [`project.godot`](https://github.com/radityobw/langkah-kecil/blob/main/project.godot).
+   - Tunggu proses impor aset selesai, lalu tekan *Run Project* (`F5`).
 
 ---
 
-## 🌈 Filosofi di Balik Langkah Kecil
+## 🧪 Pengujian & Validasi Proyek
 
-Setiap anak memiliki ritme unik dalam belajar dan tumbuh.
-**Langkah Kecil** percaya bahwa kemajuan tidak harus besar — yang penting, setiap langkah membawa senyum baru.
+```bash
+# 1. Validasi SSOT versi, referensi res://, UID, preset ekspor, & bebas em dash (Python 3.9+)
+python tools/validate_project.py
 
-> “Tidak ada langkah yang terlalu kecil, selama itu menuju arah yang benar.”
-
----
-
-## 🤝 Kontribusi
-
-Kami terbuka untuk kolaborasi!
-Jika kamu ingin membantu mengembangkan fitur, memperbaiki bug, atau menambah konten edukatif baru:
-
-1. *Fork* repositori ini
-2. Buat *branch* baru (`feature/namafitur`)
-3. Lakukan *commit* dan *pull request*
+# 2. Smoke test headless Godot 4.5 (memastikan seluruh .tscn terinstansiasi & .gd terkompilasi)
+godot --headless --path . --import
+godot --headless --path . --script res://tests/smoke_test.gd
+```
 
 ---
 
-## 🧑‍💻 Tim Pengembang
+## 📁 Struktur Direktori Proyek
 
-| Nama             | Peran          | Kontak                                          |
-| ---------------- | -------------- | ----------------------------------------------- |
-| Radityo Budi W   | Lead Developer | [LinkedIn](https://linkedin.com/in/radityobw)   |
-| Radityo Budi W   | Game Designer  | [LinkedIn](https://linkedin.com/in/radityobw)   |
-| Radityo Budi W   | UI/UX Artist   | [LinkedIn](https://linkedin.com/in/radityobw)   |
-
----
-
-## 📜 Lisensi
-Proyek ini menggunakan lisensi **Custom CC BY-NC 4.0 + Contributor Terms**.  
-- Penggunaan pribadi dan edukatif diperbolehkan.  
-- Kontribusi terbuka diterima dengan atribusi penuh.  
-- Penggunaan komersial, distribusi berbayar, atau penjualan dilarang tanpa izin tertulis.  
-
-[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
-
----
-
-## 💖 Dukungan
-
-Jika kamu percaya pada misi kami untuk membuat pendidikan inklusif lebih menyenangkan:
-⭐ Berikan *star* di repositori ini atau bagikan kepada pendidik yang membutuhkannya!
+```text
+langkah-kecil/
+├── .github/                   # Workflow CI (validate, SIDIK, Godot headless smoke), Release, & Pages
+├── assets/                    # Font (Brady Bunch), FreeGUI, JDSherbert UI SFX, musik, gambar, & video
+├── docs/                      # Situs statis GitHub Pages tersinkron otomatis dari project.godot & CHANGELOG
+├── icons/                     # Ikon slot jadwal
+├── scene/                     # Scene utama, modul emosi (6), jadwal (pagi/siang-sore/malam), SFX, & tools
+├── script/                    # Skrip GDScript (menu, emosi, jadwal, dragndrop, InventoryManager)
+├── tests/                     # Smoke test headless Godot (smoke_test.gd)
+├── tools/                     # Validator proyek luring (validate_project.py)
+├── CHANGELOG.md               # Riwayat rilis versi
+├── CITATION.cff               # Metadata sitasi proyek
+├── CONTRIBUTING.md            # Pedoman kontribusi & gerbang verifikasi
+├── CREDITS.md                 # Atribusi aset pihak ketiga & catatan lisensi
+├── export_presets.cfg         # Konfigurasi ekspor Android, Windows Desktop, & Linux
+├── LICENSE                    # Lisensi Custom CC BY-NC 4.0 + Contributor Terms
+├── project.godot              # Konfigurasi proyek & SSOT versi (config/version)
+└── SECURITY.md                # Kebijakan pelaporan keamanan
+```
 
 ---
 
-> **Langkah Kecil — karena setiap anak berhak belajar dengan bahagia.**
+## 🌈 Filosofi Langkah Kecil
 
+Setiap anak memiliki ritme unik dalam belajar dan tumbuh. **Langkah Kecil** percaya bahwa kemajuan tidak harus langsung besar: yang penting, setiap langkah menuju arah yang benar.
 
+> "Tidak ada langkah yang terlalu kecil, selama itu menuju arah yang benar."
+
+---
+
+## 🧑‍💻 Tim Pengembang & Kontributor
+
+| Nama / Akun | Peran | Tautan |
+|:---|:---|:---|
+| **Radityo Budi Waskito** | *Lead Developer*, *Game Designer*, & *UI/UX Artist* | [GitHub (@radityobw)](https://github.com/radityobw) • [LinkedIn](https://linkedin.com/in/radityobw) |
+| **@Try768** | Kontributor Pengembangan & Manajemen Aset | [GitHub (@Try768)](https://github.com/Try768) |
+
+---
+
+## 📜 Kredit & Lisensi
+
+- Rincian atribusi aset pihak ketiga tersedia di [`CREDITS.md`](https://github.com/radityobw/langkah-kecil/blob/main/CREDITS.md).
+- Proyek ini menggunakan lisensi **Custom CC BY-NC 4.0 + Contributor Terms** (lihat [`LICENSE`](https://github.com/radityobw/langkah-kecil/blob/main/LICENSE)):
+  - Penggunaan pribadi dan edukatif diperbolehkan dengan atribusi.
+  - Penggunaan komersial, distribusi berbayar, atau penjualan dilarang tanpa izin tertulis.
+
+---
+
+# 🇬🇧 English
+
+## 🎮 Project Overview
+
+**Langkah Kecil** (*Small Steps*) is an inclusive educational game built with **Godot Engine 4.5** for **children with special needs**. It combines interactive emotion-recognition exercises, a visual daily routine planner (`Morning`, `Afternoon`, `Night`) with drag-and-drop persistence, and gentle empathetic audio-visual feedback.
+
+## 🚀 Run & Verify Locally
+
+```bash
+# Clone and open in Godot Engine 4.5
+git clone https://github.com/radityobw/langkah-kecil.git
+cd langkah-kecil
+
+# Run offline repository & reference validator
+python tools/validate_project.py
+
+# Run headless Godot 4.5 import & smoke test
+godot --headless --path . --import
+godot --headless --path . --script res://tests/smoke_test.gd
+```
+
+## 📄 License
+
+Distributed under **Custom CC BY-NC 4.0 + Contributor Terms**. See [LICENSE](https://github.com/radityobw/langkah-kecil/blob/main/LICENSE) and [CREDITS.md](https://github.com/radityobw/langkah-kecil/blob/main/CREDITS.md).
