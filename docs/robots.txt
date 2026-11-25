@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://radityobw.github.io/langkah-kecil/sitemap.xml
