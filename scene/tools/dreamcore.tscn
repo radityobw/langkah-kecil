@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c7pwv0a5srpt8"]
 
 [ext_resource type="Script" uid="uid://3e1tlkxdjj6t" path="res://script/dreamcore.gd" id="1_1whg1"]
-[ext_resource type="VideoStream" uid="uid://pqs85v8tl51x" path="res://assets/video/testdc.ogv" id="2_1whg1"]
+[ext_resource type="VideoStream" uid="uid://dy8w66oxisecx" path="res://assets/video/dreamcore1080.ogv" id="2_1whg1"]
 [ext_resource type="Texture2D" uid="uid://s1suf4xyt0p3" path="res://assets/FreeGUI/png/Button.png" id="3_kktaf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uk6t5"]
