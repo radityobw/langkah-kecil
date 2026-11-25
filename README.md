@@ -51,7 +51,10 @@
 2. Ekstrak berkas `.apk` dan pindahkan ke perangkat Android (`Android 7.0 Nougat` atau lebih baru).
 3. Izinkan pemasangan dari sumber tidak dikenal (*Install unknown apps*) pada pengaturan perangkat bila diminta, lalu pasang aplikasi **Langkah Kecil**.
 
-> **Catatan Build Desktop:** *Workflow* rilis juga mendukung ekspor **Windows Desktop** dan **Linux** secara otomatis saat rilis diterbitkan.
+> **Catatan Build Desktop & Web:** *Workflow* rilis juga mengekspor paket **Windows Desktop**, **Linux**, dan **Web** serta *container image* Web di `ghcr.io`:
+> ```bash
+> docker run --rm -p 8080:80 ghcr.io/radityobw/langkah-kecil:latest
+> ```
 
 ---
 
@@ -150,6 +153,9 @@ python tools/validate_project.py
 # Run headless Godot 4.5 import & smoke test
 godot --headless --path . --import
 godot --headless --path . --script res://tests/smoke_test.gd
+
+# Or play the Web Edition via GitHub Container Registry (ghcr.io)
+docker run --rm -p 8080:80 ghcr.io/radityobw/langkah-kecil:latest
 ```
 
 ## 📄 License

@@ -45,12 +45,12 @@ Pastikan pula:
 
 ---
 
-## 4. Prosedur Rilis Multi-Platform (`release.yml`)
+## 4. Prosedur Rilis Multi-Platform & *Container Package* (`release.yml`)
 
 1. Pastikan CI pada `main` hijau.
-2. Buat *tag* beranotasi `vX.Y.Z` dan terbitkan *GitHub Release*:
+2. Buat *tag* beranotasi `vX.Y.Z` lalu *push*:
    ```bash
    git tag -a vX.Y.Z -m "Release vX.Y.Z: <ringkasan>"
    git push origin vX.Y.Z
    ```
-3. Publikasi *GitHub Release* memicu `.github/workflows/release.yml`, yang mengekspor **Android Debug APK**, **Windows Desktop**, dan **Linux**, membuat `SHA256SUMS.txt`, dan mengunggah seluruh arsip `.zip` ke aset rilis.
+3. *Push tag* `v*` (atau publikasi *GitHub Release*) otomatis memicu `.github/workflows/release.yml`, yang mengekspor **Android Debug APK**, **Windows Desktop**, **Linux**, dan **Web Edition**, membuat *GitHub Release* (apabila belum ada), mengunggah keempat arsip `.zip` beserta `SHA256SUMS.txt`, serta membangun dan mendorong *container image* edisi Web ke `ghcr.io/radityobw/langkah-kecil:latest` dan `:X.Y.Z`.

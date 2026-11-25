@@ -1,12 +1,15 @@
 name: Release & Export Langkah Kecil
 
 on:
+  push:
+    tags:
+      - "v*"
   release:
     types: [ published ]
   workflow_dispatch:
     inputs:
       release_tag:
-        description: "Optional existing release tag (e.g., v1.1.0) to attach exported builds and SHA256SUMS.txt"
+        description: "Optional existing release tag (e.g., v1.1.0) to attach exported builds, SHA256SUMS.txt, and tag GHCR image"
         required: false
         default: ""
         type: string
@@ -45,6 +48,13 @@ jobs:
             out: build/linux/LangkahKecil.x86_64
             artifact: langkah-kecil-linux
             archive: langkah-kecil-linux.zip
+          - name: Web (HTML5)
+            preset: Web
+            mode: release
+            dir: web
+            out: build/web/index.html
+            artifact: langkah-kecil-web
+            archive: langkah-kecil-web.zip
 
     steps:
       - name: Checkout Repository
@@ -53,8 +63,11 @@ jobs:
       - name: Prepare Godot Export Templates
         run: |
           mkdir -p ~/.local/share/godot/export_templates ~/.config/godot
-          cp -r /root/.local/share/godot/export_templates/* ~/.local/share/godot/export_templates/
+          cp -r /root/.local/share/godot/export_templates/* ~/.local/share/godot/export_templates/ || true
           cp -r /root/.config/godot/* ~/.config/godot/ || true
+          if [ -f /root/debug.keystore ] && [ ! -f "$HOME/debug.keystore" ]; then
+            cp /root/debug.keystore "$HOME/debug.keystore" || true
+          fi
 
       - name: Import Resources & Export ${{ matrix.preset }}
         run: |
@@ -85,6 +98,26 @@ jobs:
       contents: write
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify config/version Matches Release Tag
+        env:
+          EVENT_TAG: ${{ github.event.release.tag_name }}
+          PUSH_TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+          DISPATCH_TAG: ${{ inputs.release_tag }}
+        run: |
+          APP_VER="$(python3 -c "import re,pathlib; print(re.search(r'^config/version=\"([^\"]+)\"', pathlib.Path('project.godot').read_text(), re.M).group(1))")"
+          RAW_TAG="${EVENT_TAG:-${PUSH_TAG:-$DISPATCH_TAG}}"
+          echo "RELEASE_TAG=$RAW_TAG" >> "$GITHUB_ENV"
+          if [ -n "$RAW_TAG" ]; then
+            TAG_VER="${RAW_TAG#v}"
+            if [ "$APP_VER" != "$TAG_VER" ]; then
+              echo "project.godot config/version ($APP_VER) does not match tag ($TAG_VER)" >&2
+              exit 1
+            fi
+          fi
+
       - name: Download Export Artifacts
         uses: actions/download-artifact@v4
         with:
@@ -96,15 +129,72 @@ jobs:
           cd release-assets
           sha256sum *.zip > SHA256SUMS.txt
 
-      - name: Attach Assets to GitHub Release
+      - name: Create or Update GitHub Release & Upload Assets
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EVENT_TAG: ${{ github.event.release.tag_name }}
-          DISPATCH_TAG: ${{ inputs.release_tag }}
         run: |
-          RELEASE_TAG="${EVENT_TAG:-$DISPATCH_TAG}"
           if [ -n "$RELEASE_TAG" ]; then
+            if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+              gh release create "$RELEASE_TAG" --title "Langkah Kecil ${RELEASE_TAG}" --generate-notes
+            fi
             gh release upload "$RELEASE_TAG" release-assets/*.zip release-assets/SHA256SUMS.txt --clobber
           else
-            echo "No release_tag specified on workflow_dispatch; skipping gh release upload."
+            echo "No release_tag specified on workflow_dispatch; skipping GitHub Release publish."
           fi
+
+  publish-ghcr:
+    name: Build & Push Web Container to ghcr.io
+    needs: export
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download Web Export Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: langkah-kecil-web
+          path: web-dist
+
+      - name: Extract Web Export Bundle
+        run: |
+          mkdir -p build/web
+          unzip -oq web-dist/langkah-kecil-web.zip -d build/web
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare Image Tags
+        id: meta
+        env:
+          EVENT_TAG: ${{ github.event.release.tag_name }}
+          PUSH_TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+          DISPATCH_TAG: ${{ inputs.release_tag }}
+          SHA_VAL: ${{ github.sha }}
+        run: |
+          RAW_TAG="${EVENT_TAG:-${PUSH_TAG:-$DISPATCH_TAG}}"
+          SHORT_SHA="${SHA_VAL:0:7}"
+          TAGS="ghcr.io/radityobw/langkah-kecil:latest,ghcr.io/radityobw/langkah-kecil:sha-${SHORT_SHA}"
+          if [ -n "$RAW_TAG" ]; then
+            CLEAN_VER="${RAW_TAG#v}"
+            TAGS="${TAGS},ghcr.io/radityobw/langkah-kecil:${CLEAN_VER}"
+          fi
+          echo "tags=${TAGS}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/radityobw/langkah-kecil
+            org.opencontainers.image.licenses=CC-BY-NC-4.0
