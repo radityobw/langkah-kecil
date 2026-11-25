@@ -135,7 +135,7 @@ def build_site(out_dir: Path) -> None:
     (out_dir / "index.html").write_text(html_out, encoding="utf-8")
     (out_dir / "sitemap.xml").write_text(sitemap_out, encoding="utf-8")
 
-    for fname in (".nojekyll", "robots.txt"):
+    for fname in (".nojekyll", "robots.txt", "sitemap.txt"):
         src = DOCS_DIR / fname
         if src.is_file():
             shutil.copy2(src, out_dir / fname)
