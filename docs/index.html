@@ -15,7 +15,7 @@
   <meta name="google-site-verification" content="6y-5Cff0WkeBj7_uWju39rv0nQnqmEgw81an57VJkGg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Langkah Kecil" />
@@ -31,6 +31,15 @@
   <meta name="twitter:title" content="Langkah Kecil - Game Edukatif Inklusif (Godot 4.5)" />
   <meta name="twitter:description" content="Aplikasi permainan edukasi untuk anak berkebutuhan khusus: pengenalan 6 emosi dasar, manajemen jadwal harian drag-and-drop, dan umpan balik empatik." />
   <meta name="twitter:image" content="https://radityobw.github.io/langkah-kecil/og-banner.png" />
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
 
   <script type="application/ld+json">
   {
@@ -66,69 +75,227 @@
 
   <style>
     :root {
-      --bg: #fffaf2;
-      --bg-card: #ffffff;
-      --bg-soft: #fff2dc;
-      --border: #f2dfc2;
-      --text: #2d2620;
-      --muted: #6e6052;
-      --accent: #ea7a2e;
-      --accent-dark: #d26218;
-      --mint: #2f9e6b;
-      --sky: #2b82b8;
+      --bg: #faf6ee;
+      --card: #ffffff;
+      --soft: #f5ecdc;
+      --border: #e2d5c1;
+      --shadow: #eadbc4;
+      --text: #221b15;
+      --muted: #66584b;
+      --terracotta: #d85a26;
+      --rose: #e94d8a;
+      --sage: #257d58;
+      --mono: "JetBrains Mono", Consolas, monospace;
+      --display: "Fredoka", "Nunito", sans-serif;
+      --sans: "Nunito", -apple-system, BlinkMacSystemFont, sans-serif;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top right, #fde9c9 0%, var(--bg) 50%);
+      font-family: var(--sans);
+      background-color: var(--bg);
+      background-image: radial-gradient(#d8c8b0 1px, transparent 1px);
+      background-size: 28px 28px;
       color: var(--text);
       line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
-    h1, h2, h3 { font-family: "Fredoka", "Nunito", sans-serif; }
-    a { color: var(--accent-dark); text-decoration: none; }
+    a { color: var(--terracotta); font-weight: 700; text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .wrap { max-width: 1040px; margin: 0 auto; padding: 36px 20px 64px; }
-    .hero {
-      background: linear-gradient(145deg, #ffffff 0%, #fff4e3 100%);
+
+    .progress-track {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(34, 27, 21, 0.08);
+      z-index: 60;
+      pointer-events: none;
+    }
+    #scroll-progress-bar {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--rose) 0%, var(--terracotta) 100%);
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(250, 246, 238, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 700;
+      font-family: var(--display);
+      font-size: 16px;
+    }
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      background: var(--rose);
+      display: inline-block;
+    }
+    .topbar-nav { display: flex; flex-wrap: wrap; gap: 18px; }
+    .topbar-nav a { color: var(--muted); font-family: var(--sans); font-size: 14px; }
+    .topbar-nav a:hover { color: var(--text); text-decoration: none; }
+
+    .wrap { max-width: 1220px; margin: 0 auto; padding: 36px 24px 72px; }
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(350px, 0.88fr);
+      gap: 40px;
+      align-items: start;
+    }
+    .vitrine-col {
+      position: sticky;
+      top: 76px;
+      order: 2;
+    }
+    .chapters-col { order: 1; min-width: 0; }
+
+    #stage-3d {
+      position: relative;
+      height: min(520px, calc(100vh - 115px));
+      min-height: 390px;
+      background: linear-gradient(155deg, #fffdf9 0%, #fff0f5 100%);
       border: 2px solid var(--border);
       border-radius: 24px;
-      padding: 36px 32px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 28px;
-      align-items: center;
-      box-shadow: 0 18px 40px rgba(210, 98, 24, 0.10);
+      box-shadow: 6px 6px 0 var(--shadow);
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
     }
-    @media (max-width: 780px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .cta-row, .pill-row, .badge-row { justify-content: center; }
+    #stage-3d:active { cursor: grabbing; }
+    .stage-hud-top {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      pointer-events: none;
+      z-index: 4;
+    }
+    #stage-chapter {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .stage-hud-bottom {
+      position: absolute;
+      bottom: 16px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      pointer-events: none;
+      z-index: 4;
+    }
+    #canvas-3d {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+    #stage-3d.is-ready #canvas-3d { opacity: 1; }
+    .stage-fallback {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 156px;
+      height: 156px;
+      border-radius: 20px;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      z-index: 1;
+      transition: opacity 0.45s ease;
+    }
+    #stage-3d.is-ready .stage-fallback { display: none; }
+
+    .chapter {
+      padding-bottom: 48px;
+      margin-bottom: 48px;
+      border-bottom: 2px dashed var(--border);
+    }
+    .chapter:last-child {
+      border-bottom: none;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
     }
     .eyebrow {
       display: inline-block;
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: #9e450b;
-      background: #ffe7c7;
-      border: 1px solid #f6c48a;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #8f3913;
+      background: #ffe7ce;
+      border: 1.5px solid #eec095;
       border-radius: 999px;
       padding: 4px 14px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    h1 { margin: 0 0 10px; font-size: clamp(28px, 4vw, 42px); line-height: 1.15; color: #241b14; }
-    .lead { margin: 0 0 18px; color: #4c4036; font-size: 17px; max-width: 700px; }
+    h1, h2, h3 { font-family: var(--display); }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.12;
+      color: #1f1711;
+    }
+    .lead {
+      margin: 0 0 20px;
+      color: #463a2f;
+      font-size: 16.5px;
+      max-width: 660px;
+    }
     .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
     .pill {
       font-size: 13px;
       font-weight: 700;
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      color: #5c4938;
+      background: var(--soft);
+      border: 1.5px solid var(--border);
+      color: #534232;
       padding: 5px 12px;
       border-radius: 999px;
     }
-    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
     .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn {
       display: inline-block;
@@ -138,63 +305,58 @@
       font-size: 14.5px;
       border: 2px solid var(--border);
       color: var(--text);
-      background: #ffffff;
+      background: var(--card);
+      box-shadow: 3px 3px 0 var(--shadow);
     }
     .btn.primary {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-      border-color: var(--accent-dark);
+      background: var(--terracotta);
+      border-color: #b44214;
       color: #ffffff;
+      box-shadow: 3px 3px 0 #b44214;
     }
-    .btn:hover { text-decoration: none; transform: translateY(-1px); }
-    .logo-box {
-      background: #ffffff;
-      border: 2px solid var(--border);
-      border-radius: 22px;
-      padding: 16px;
-      text-align: center;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
-    }
-    .logo-box img { width: 156px; max-width: 100%; height: auto; border-radius: 14px; display: block; }
-    section { margin-top: 38px; }
+    .btn:hover { text-decoration: none; transform: translate(-1px, -1px); }
+
     h2 {
       font-size: 23px;
-      color: #241b14;
-      margin: 0 0 14px;
-      border-left: 5px solid var(--accent);
+      color: #1f1711;
+      margin: 0 0 16px;
+      border-left: 5px solid var(--rose);
       padding-left: 12px;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 16px;
     }
     .card {
-      background: var(--bg-card);
-      border: 1.5px solid var(--border);
+      background: var(--card);
+      border: 2px solid var(--border);
       border-radius: 18px;
       padding: 20px;
-      box-shadow: 0 6px 16px rgba(45, 38, 32, 0.04);
+      box-shadow: 4px 4px 0 var(--shadow);
     }
-    .card h3 { margin: 0 0 8px; font-size: 17px; color: var(--accent-dark); }
+    .card h3 { margin: 0 0 8px; font-size: 17px; color: var(--terracotta); }
     .card p { margin: 0; font-size: 14.5px; color: var(--muted); }
     .quote-box {
-      background: linear-gradient(135deg, #e8f7f0 0%, #f1f9ff 100%);
-      border: 1.5px solid #bfe3d2;
+      background: #edf9f2;
+      border: 2px solid #9fd8b9;
       border-radius: 18px;
-      padding: 22px 26px;
-      color: #254638;
-      font-size: 16px;
+      padding: 24px 26px;
+      color: #1d4231;
+      font-size: 16.5px;
+      box-shadow: 4px 4px 0 #cdebd9;
     }
     .release-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
     }
     .release-card {
-      background: var(--bg-card);
-      border: 1.5px solid var(--border);
+      background: var(--card);
+      border: 2px solid var(--border);
       border-radius: 18px;
       padding: 20px;
+      box-shadow: 4px 4px 0 var(--shadow);
     }
     .release-head {
       display: flex;
@@ -204,120 +366,157 @@
     }
     .release-tag {
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13.5px;
       color: #ffffff;
-      background: var(--mint);
+      background: var(--sage);
       padding: 3px 12px;
       border-radius: 999px;
     }
-    .release-date { font-size: 13px; color: var(--muted); }
+    .release-date { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
     .release-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
     .release-card li { margin-bottom: 6px; }
     footer {
-      margin-top: 48px;
+      margin-top: 40px;
       padding-top: 20px;
-      border-top: 1.5px solid var(--border);
+      border-top: 2px solid var(--border);
       color: var(--muted);
-      font-size: 13.5px;
+      font-family: var(--mono);
+      font-size: 12px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 10px;
     }
+    @media (max-width: 960px) {
+      .story-grid { grid-template-columns: 1fr; gap: 28px; }
+      .vitrine-col { position: relative; top: 0; order: 1; }
+      .chapters-col { order: 2; }
+      #stage-3d { height: 340px; min-height: 300px; }
+    }
   </style>
 </head>
 <body>
+  <div class="progress-track"><div id="scroll-progress-bar"></div></div>
+
+  <nav class="topbar" aria-label="Navigasi Langkah Kecil">
+    <div class="topbar-inner">
+      <a class="brand-mark" href="https://radityobw.github.io/langkah-kecil/"><span class="brand-dot"></span>Langkah Kecil</a>
+      <div class="topbar-nav">
+        <a href="#sec-fitur">Fitur</a>
+        <a href="#sec-filosofi">Filosofi</a>
+        <a href="#sec-rilis">Rilis</a>
+        <a href="https://radityobw.github.io/">Portfolio</a>
+      </div>
+    </div>
+  </nav>
+
   <div class="wrap">
-    <header class="hero">
-      <div>
-        <span class="eyebrow">v1.1.0 | Godot Engine 4.5 | Custom CC BY-NC 4.0</span>
-        <h1>Langkah Kecil: Game Edukatif Inklusif</h1>
-        <p class="lead">
-          Aplikasi permainan edukasi yang dirancang khusus untuk <strong>anak-anak berkebutuhan khusus</strong> menggunakan <strong>Godot Engine 4.5</strong>, memadukan pengenalan emosi interaktif, jadwal harian visual, dan umpan balik penuh empati.
-        </p>
-        <div class="pill-row">
-          <span class="pill">Godot Engine 4.5</span>
-          <span class="pill">6 Modul Emosi Interaktif</span>
-          <span class="pill">Jadwal Pagi, Siang/Sore &amp; Malam</span>
-          <span class="pill">Android 7+ APK &amp; Desktop</span>
-        </div>
-        <div class="badge-row">
-          <a href="https://github.com/radityobw/langkah-kecil/releases/latest"><img src="https://img.shields.io/github/v/release/radityobw/langkah-kecil?label=Release&color=ea7a2e&cacheSeconds=3600" alt="GitHub Release" /></a>
-          <a href="https://github.com/radityobw/langkah-kecil/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/radityobw/langkah-kecil/ci.yml?label=CI&color=2f9e6b" alt="CI Status" /></a>
-          <a href="https://github.com/radityobw/langkah-kecil/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg" alt="License CC BY-NC 4.0" /></a>
-        </div>
-        <div class="cta-row">
-          <a class="btn primary" href="https://github.com/radityobw/langkah-kecil/releases/latest">Unduh APK (GitHub Releases)</a>
-          <a class="btn" href="https://github.com/radityobw/langkah-kecil">Repositori GitHub</a>
-          <a class="btn" href="https://github.com/radityobw/langkah-kecil/blob/main/CREDITS.md">Kredit &amp; Aset</a>
-        </div>
-      </div>
-      <div class="logo-box">
-        <img src="logo.jpeg" alt="Ikon Langkah Kecil" width="156" height="156" />
-      </div>
-    </header>
-
-    <section>
-      <h2>Fitur Utama</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Pengenalan Emosi Interaktif</h3>
-          <p>Melatih anak mengenali ekspresi serta respons tepat untuk 6 emosi dasar (senang, sedih, marah, takut, malu, terkejut) dengan umpan balik audio dan visual yang lembut.</p>
-        </div>
-        <div class="card">
-          <h3>Jadwal Harian Visual</h3>
-          <p>Membantu orang tua dan pendidik menyusun rutinitas pagi, siang/sore, serta malam secara <em>drag-and-drop</em> dengan penyimpanan otomatis lokal.</p>
-        </div>
-        <div class="card">
-          <h3>Umpan Balik Empatik</h3>
-          <p>Respon audio positif dan lembut membantu anak belajar tanpa tekanan: setiap pilihan menjadi kesempatan belajar yang aman dan menyenangkan.</p>
-        </div>
-        <div class="card">
-          <h3>Antarmuka Ramah Anak</h3>
-          <p>Tombol berukuran besar, navigasi sederhana, musik latar opsional di menu pengaturan, serta dukungan layar sentuh Android maupun desktop.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Filosofi Langkah Kecil</h2>
-      <div class="quote-box">
-        <strong>Setiap anak memiliki ritme unik dalam belajar dan bertumbuh.</strong> Kemajuan tidak harus langsung besar: selama menuju arah yang tepat, setiap langkah kecil layak dirayakan bersama.
-      </div>
-    </section>
-
-    <section>
-      <h2>Rilis Terbaru (Tersinkron Otomatis dari CHANGELOG.md)</h2>
-      <div class="release-grid">
-        <!-- AUTO_CHANGELOG_START -->
-        <article class="release-card">
-          <div class="release-head">
-            <span class="release-tag">v1.1.0</span>
-            <span class="release-date">2026-11-25</span>
+    <div class="story-grid">
+      <main class="chapters-col">
+        <section class="chapter" data-chapter="intro" id="sec-intro">
+          <span class="eyebrow">v1.1.0 | Godot Engine 4.5 | Custom CC BY-NC 4.0</span>
+          <h1>Langkah Kecil: Game Edukatif Inklusif</h1>
+          <p class="lead">
+            Aplikasi permainan edukasi yang dirancang khusus untuk <strong>anak-anak berkebutuhan khusus</strong> menggunakan <strong>Godot Engine 4.5</strong>, memadukan pengenalan emosi interaktif, jadwal harian visual, dan umpan balik penuh empati.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Godot Engine 4.5</span>
+            <span class="pill">6 Modul Emosi Interaktif</span>
+            <span class="pill">Jadwal Pagi, Siang/Sore &amp; Malam</span>
+            <span class="pill">Android 7+ APK &amp; Desktop</span>
           </div>
-          <ul>
-            <li>Pematangan tata kelola repositori, validasi referensi proyek otomatis, smoke test headless Godot 4.5, dan GitHub Pages.</li>
-          </ul>
-        </article>
-        <!-- AUTO_CHANGELOG_END -->
-      </div>
-    </section>
+          <div class="badge-row">
+            <a href="https://github.com/radityobw/langkah-kecil/releases/latest"><img src="https://img.shields.io/github/v/release/radityobw/langkah-kecil?label=Release&color=ea7a2e&cacheSeconds=3600" alt="GitHub Release" /></a>
+            <a href="https://github.com/radityobw/langkah-kecil/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/radityobw/langkah-kecil/ci.yml?label=CI&color=2f9e6b" alt="CI Status" /></a>
+            <a href="https://github.com/radityobw/langkah-kecil/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg" alt="License CC BY-NC 4.0" /></a>
+          </div>
+          <div class="cta-row">
+            <a class="btn primary" href="https://github.com/radityobw/langkah-kecil/releases/latest">Unduh APK (GitHub Releases)</a>
+            <a class="btn" href="https://github.com/radityobw/langkah-kecil">Repositori GitHub</a>
+            <a class="btn" href="https://github.com/radityobw/langkah-kecil/blob/main/CREDITS.md">Kredit &amp; Aset</a>
+          </div>
+        </section>
 
-    <section>
-      <h2>Kredit &amp; Lisensi</h2>
-      <div class="card">
-        <p>
-          Dikembangkan oleh <strong>Radityo Budi Waskito</strong> (<a href="https://github.com/radityobw">@radityobw</a>) bersama kontributor <a href="https://github.com/Try768">@Try768</a>.
-          Proyek ini didistribusikan di bawah lisensi <strong>Custom CC BY-NC 4.0 + Contributor Terms</strong> (gratis untuk penggunaan pribadi dan edukatif; dilarang untuk penggunaan komersial tanpa izin tertulis).
-          Rincian atribusi aset pihak ketiga tercantum pada <a href="https://github.com/radityobw/langkah-kecil/blob/main/CREDITS.md">CREDITS.md</a>.
-        </p>
-      </div>
-    </section>
+        <section class="chapter" data-chapter="fitur" id="sec-fitur">
+          <h2>Fitur Utama</h2>
+          <div class="grid">
+            <div class="card">
+              <h3>Pengenalan Emosi Interaktif</h3>
+              <p>Melatih anak mengenali ekspresi serta respons tepat untuk 6 emosi dasar (senang, sedih, marah, takut, malu, terkejut) dengan umpan balik audio dan visual yang lembut.</p>
+            </div>
+            <div class="card">
+              <h3>Jadwal Harian Visual</h3>
+              <p>Membantu orang tua dan pendidik menyusun rutinitas pagi, siang/sore, serta malam secara <em>drag-and-drop</em> dengan penyimpanan otomatis lokal.</p>
+            </div>
+            <div class="card">
+              <h3>Umpan Balik Empatik</h3>
+              <p>Respon audio positif dan lembut membantu anak belajar tanpa tekanan: setiap pilihan menjadi kesempatan belajar yang aman dan menyenangkan.</p>
+            </div>
+            <div class="card">
+              <h3>Antarmuka Ramah Anak</h3>
+              <p>Tombol berukuran besar, navigasi sederhana, musik latar opsional di menu pengaturan, serta dukungan layar sentuh Android maupun desktop.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter" data-chapter="filosofi" id="sec-filosofi">
+          <h2>Filosofi Langkah Kecil</h2>
+          <div class="quote-box">
+            <strong>Setiap anak memiliki ritme unik dalam belajar dan bertumbuh.</strong> Kemajuan tidak harus langsung besar: selama menuju arah yang tepat, setiap langkah kecil layak dirayakan bersama.
+          </div>
+        </section>
+
+        <section class="chapter" data-chapter="rilis" id="sec-rilis">
+          <h2>Rilis Terbaru (Tersinkron Otomatis dari CHANGELOG.md)</h2>
+          <div class="release-grid">
+            <!-- AUTO_CHANGELOG_START -->
+            <article class="release-card">
+              <div class="release-head">
+                <span class="release-tag">v1.1.0</span>
+                <span class="release-date">2026-11-25</span>
+              </div>
+              <ul>
+                <li>Pematangan tata kelola repositori, validasi referensi proyek otomatis, smoke test headless Godot 4.5, dan GitHub Pages.</li>
+              </ul>
+            </article>
+            <!-- AUTO_CHANGELOG_END -->
+          </div>
+        </section>
+
+        <section class="chapter" data-chapter="kredit" id="sec-kredit">
+          <h2>Kredit &amp; Lisensi</h2>
+          <div class="card">
+            <p>
+              Dikembangkan oleh <strong>Radityo Budi Waskito</strong> (<a href="https://github.com/radityobw">@radityobw</a>) bersama kontributor <a href="https://github.com/Try768">@Try768</a>.
+              Proyek ini didistribusikan di bawah lisensi <strong>Custom CC BY-NC 4.0 + Contributor Terms</strong> (gratis untuk penggunaan pribadi dan edukatif; dilarang untuk penggunaan komersial tanpa izin tertulis).
+              Rincian atribusi aset pihak ketiga tercantum pada <a href="https://github.com/radityobw/langkah-kecil/blob/main/CREDITS.md">CREDITS.md</a>.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <aside class="vitrine-col" aria-label="Panggung 3D Emblem Langkah Kecil">
+        <div id="stage-3d">
+          <div class="stage-hud-top">
+            <span id="stage-chapter">01 / PENGENALAN</span>
+            <span>GESER UNTUK MEMUTAR</span>
+          </div>
+          <img class="stage-fallback" src="logo.jpeg" alt="Ikon Langkah Kecil" width="156" height="156" />
+          <canvas id="canvas-3d" aria-label="Model 3D Emblem Langkah Kecil"></canvas>
+          <div class="stage-hud-bottom">
+            <span>langkah-kecil.glb</span>
+            <span>INTERACTIVE 3D BLOCK</span>
+          </div>
+        </div>
+      </aside>
+    </div>
 
     <footer>
       <span>Langkah Kecil - Godot 4.5 - Custom CC BY-NC 4.0 - <!-- AUTO_UPDATED_START -->Updated 2026-11-25<!-- AUTO_UPDATED_END --></span>
       <span><a href="https://github.com/radityobw/langkah-kecil">GitHub</a> | <a href="https://github.com/radityobw/langkah-kecil/releases">Releases</a> | <a href="https://github.com/radityobw/langkah-kecil/blob/main/CHANGELOG.md">Changelog</a> | <a href="https://github.com/radityobw/langkah-kecil/blob/main/CREDITS.md">Credits</a></span>
     </footer>
   </div>
+
+  <script type="module" src="scene3d.js"></script>
 </body>
 </html>
