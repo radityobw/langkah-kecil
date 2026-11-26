@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>(function(){try{var t=localStorage.getItem('langkah_kecil_theme');document.documentElement.dataset.theme=(t==='dark')?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();</script>
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Langkah Kecil" />
@@ -76,16 +77,50 @@
   <style>
     :root {
       --bg: #fbfbfd;
+      --topbar-bg: rgba(251, 251, 253, 0.8);
       --card: #ffffff;
-      --soft: #f5f5f7;
       --hairline: rgba(0, 0, 0, 0.08);
+      --card-border: rgba(0, 0, 0, 0.06);
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
       --text: #1d1d1f;
+      --lead: #424245;
       --muted: #6e6e73;
       --rose: #e83e7a;
+      --rose-hover: #d4316b;
       --sage: #1f8a5b;
+      --quote-bg: #f2f9f5;
+      --quote-border: rgba(31, 138, 91, 0.18);
+      --quote-text: #164430;
+      --btn-bg: rgba(0, 0, 0, 0.045);
+      --btn-hover: rgba(0, 0, 0, 0.09);
+      --stage-bg: radial-gradient(circle at 50% 45%, #ffffff 0%, #fdf2f6 76%, #f8e6ee 100%);
+      --stage-shadow: 0 20px 50px rgba(232, 62, 122, 0.06);
+      --stage-pill: rgba(255, 255, 255, 0.86);
       --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
       --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
       --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+    }
+    html[data-theme="dark"] {
+      --bg: #09080b;
+      --topbar-bg: rgba(9, 8, 11, 0.78);
+      --card: #16141a;
+      --hairline: rgba(255, 255, 255, 0.10);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      --text: #f5f5f7;
+      --lead: #c7c3ce;
+      --muted: #9892a3;
+      --rose: #ff5c93;
+      --rose-hover: #ff75a4;
+      --sage: #30d158;
+      --quote-bg: rgba(48, 209, 88, 0.09);
+      --quote-border: rgba(48, 209, 88, 0.25);
+      --quote-text: #c9f2d5;
+      --btn-bg: rgba(255, 255, 255, 0.08);
+      --btn-hover: rgba(255, 255, 255, 0.14);
+      --stage-bg: radial-gradient(ellipse 68% 66% at 50% 48%, #3a2934 0%, #1e161c 50%, #100c0f 82%, #080608 100%);
+      --stage-shadow: 0 24px 56px rgba(0, 0, 0, 0.48);
+      --stage-pill: rgba(255, 255, 255, 0.10);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -95,8 +130,10 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: clip;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      transition: background-color 0.22s ease, color 0.22s ease;
     }
     a { color: var(--rose); font-weight: 500; text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -123,17 +160,17 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      height: 52px;
-      background: rgba(251, 251, 253, 0.8);
+      min-height: 52px;
+      background: var(--topbar-bg);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid var(--hairline);
     }
     .topbar-inner {
-      max-width: 1180px;
-      height: 100%;
+      max-width: 1220px;
+      min-height: 52px;
       margin: 0 auto;
-      padding: 0 28px;
+      padding: 10px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -149,6 +186,7 @@
       font-weight: 600;
       font-size: 14px;
       letter-spacing: -0.01em;
+      white-space: nowrap;
     }
     .brand-mark:hover { text-decoration: none; }
     .brand-dot {
@@ -157,33 +195,54 @@
       border-radius: 50%;
       background: var(--rose);
       display: inline-block;
+      flex-shrink: 0;
     }
-    .topbar-nav { display: flex; flex-wrap: wrap; gap: 24px; }
-    .topbar-nav a { color: var(--muted); font-weight: 500; transition: color 0.15s ease; }
+    .topbar-nav { display: flex; align-items: center; gap: 20px; }
+    .topbar-nav a { color: var(--muted); font-weight: 500; white-space: nowrap; transition: color 0.15s ease; }
     .topbar-nav a:hover { color: var(--text); text-decoration: none; }
+    .theme-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 980px;
+      border: 1px solid var(--hairline);
+      background: var(--btn-bg);
+      color: var(--text);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+    .theme-btn:hover { background: var(--btn-hover); }
+    .theme-btn svg { width: 15px; height: 15px; display: block; }
+    html[data-theme="dark"] .icon-moon { display: none; }
+    html[data-theme="light"] .icon-sun { display: none; }
 
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 56px 28px 84px; }
+    .wrap { max-width: 1220px; margin: 0 auto; padding: 56px 28px 84px; }
     .story-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
-      gap: 56px;
+      grid-template-columns: minmax(0, 1.18fr) minmax(350px, 0.82fr);
+      gap: 48px;
       align-items: start;
     }
     .vitrine-col {
       position: sticky;
       top: 84px;
       order: 2;
+      min-width: 0;
     }
-    .chapters-col { order: 1; min-width: 0; }
+    .chapters-col { order: 1; min-width: 0; max-width: 100%; }
 
     #stage-3d {
       position: relative;
       height: min(560px, calc(100vh - 120px));
-      min-height: 420px;
-      background: radial-gradient(circle at 50% 45%, #ffffff 0%, #fdf2f6 76%, #f8e6ee 100%);
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      min-height: 400px;
+      background: var(--stage-bg);
+      border: 1px solid var(--card-border);
       border-radius: 28px;
-      box-shadow: 0 20px 50px rgba(232, 62, 122, 0.06);
+      box-shadow: var(--stage-shadow);
       overflow: hidden;
       cursor: grab;
       user-select: none;
@@ -205,9 +264,9 @@
       z-index: 4;
     }
     #stage-chapter {
-      background: rgba(255, 255, 255, 0.86);
+      background: var(--stage-pill);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--hairline);
       color: var(--text);
       padding: 4px 12px;
       border-radius: 980px;
@@ -251,9 +310,11 @@
     #stage-3d.is-ready .stage-fallback { display: none; }
 
     .chapter {
-      padding-bottom: 64px;
-      margin-bottom: 64px;
+      padding-bottom: 60px;
+      margin-bottom: 60px;
       border-bottom: 1px solid var(--hairline);
+      min-width: 0;
+      max-width: 100%;
     }
     .chapter:last-child {
       border-bottom: none;
@@ -272,18 +333,19 @@
     h1, h2, h3 { font-family: var(--display); }
     h1 {
       margin: 0 0 16px;
-      font-size: clamp(34px, 4.4vw, 52px);
+      font-size: clamp(32px, 4.2vw, 50px);
       font-weight: 700;
       line-height: 1.06;
       letter-spacing: -0.035em;
       color: var(--text);
+      overflow-wrap: break-word;
     }
     .lead {
       margin: 0 0 24px;
-      color: #424245;
+      color: var(--lead);
       font-size: 17px;
       line-height: 1.55;
-      max-width: 620px;
+      max-width: 640px;
     }
     .spec-meta {
       margin: 0 0 26px;
@@ -299,18 +361,19 @@
       border-radius: 980px;
       font-weight: 500;
       font-size: 14px;
-      border: 1px solid transparent;
+      border: 1px solid var(--hairline);
       color: var(--text);
-      background: rgba(0, 0, 0, 0.045);
+      background: var(--btn-bg);
       transition: background 0.15s ease;
     }
     .btn.primary {
       background: var(--rose);
+      border-color: var(--rose);
       color: #ffffff;
       font-weight: 600;
     }
-    .btn:hover { text-decoration: none; background: rgba(0, 0, 0, 0.09); }
-    .btn.primary:hover { background: #d4316b; }
+    .btn:hover { text-decoration: none; background: var(--btn-hover); }
+    .btn.primary:hover { background: var(--rose-hover); border-color: var(--rose-hover); }
 
     h2 {
       font-size: 28px;
@@ -318,46 +381,60 @@
       letter-spacing: -0.025em;
       color: var(--text);
       margin: 0 0 18px;
+      overflow-wrap: break-word;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 16px;
+      min-width: 0;
     }
     .card {
       background: var(--card);
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      box-shadow: var(--card-shadow);
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
     .card h3 { margin: 0 0 8px; font-size: 17px; font-weight: 600; letter-spacing: -0.015em; color: var(--text); }
-    .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; overflow-wrap: break-word; }
+    :not(pre) > code { overflow-wrap: anywhere; word-break: break-word; font-size: 0.9em; }
     .quote-box {
-      background: #f2f9f5;
-      border: 1px solid rgba(31, 138, 91, 0.18);
+      background: var(--quote-bg);
+      border: 1px solid var(--quote-border);
       border-radius: 24px;
       padding: 28px 30px;
-      color: #164430;
+      color: var(--quote-text);
       font-size: 17px;
       line-height: 1.6;
+      min-width: 0;
+      overflow-wrap: break-word;
     }
     .release-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: 1fr;
       gap: 16px;
+      min-width: 0;
     }
     .release-card {
       background: var(--card);
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 22px 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      box-shadow: var(--card-shadow);
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
     .release-head {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      gap: 8px;
       margin-bottom: 12px;
     }
     .release-tag {
@@ -371,7 +448,7 @@
     }
     .release-date { font-family: var(--mono); font-size: 12px; color: var(--muted); }
     .release-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
-    .release-card li { margin-bottom: 6px; }
+    .release-card li { margin-bottom: 6px; overflow-wrap: anywhere; }
     footer {
       margin-top: 40px;
       padding-top: 24px;
@@ -389,6 +466,12 @@
       .chapters-col { order: 2; }
       #stage-3d { height: 360px; min-height: 300px; }
     }
+    @media (max-width: 640px) {
+      .wrap { padding: 32px 18px 64px; }
+      .topbar-inner { padding: 10px 16px; gap: 10px; }
+      .topbar-nav { gap: 12px; font-size: 12px; }
+      .topbar-nav a:nth-child(n+4) { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -402,6 +485,10 @@
         <a href="#sec-filosofi">Filosofi</a>
         <a href="#sec-rilis">Rilis</a>
         <a href="https://radityobw.github.io/">Portfolio</a>
+        <button id="theme-toggle" class="theme-btn" type="button" aria-label="Toggle light or dark theme" title="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -505,6 +592,17 @@
     </footer>
   </div>
 
+  <script>
+    (function(){
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('langkah_kecil_theme', next); } catch(e) {}
+      });
+    })();
+  </script>
   <script type="module" src="scene3d.js"></script>
 </body>
 </html>

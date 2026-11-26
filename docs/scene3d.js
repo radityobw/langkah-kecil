@@ -90,6 +90,28 @@ function initShowcase() {
   roseRim.position.set(-2.4, 2.2, -3.4);
   scene.add(roseRim);
 
+  function applyTheme() {
+    const isDark = document.documentElement.dataset.theme === 'dark';
+    if (isDark) {
+      renderer.toneMappingExposure = 0.98;
+      scene.environmentIntensity = 0.54;
+      warmKey.intensity = 1.4;
+      softFill.intensity = 0.65;
+      roseRim.intensity = 1.1;
+    } else {
+      renderer.toneMappingExposure = 0.94;
+      scene.environmentIntensity = 0.48;
+      warmKey.intensity = 1.25;
+      softFill.intensity = 0.45;
+      roseRim.intensity = 0.85;
+    }
+  }
+  applyTheme();
+  new MutationObserver(applyTheme).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+
   const pivot = new THREE.Group();
   scene.add(pivot);
 
