@@ -11,11 +11,11 @@ const KEYFRAMES = [
 ];
 
 const CHAPTER_LABELS = {
-  intro: '01 / PENGENALAN',
-  fitur: '02 / FITUR UTAMA',
-  filosofi: '03 / FILOSOFI',
-  rilis: '04 / RILIS',
-  kredit: '05 / KREDIT & LISENSI',
+  intro: '01 Pengenalan',
+  fitur: '02 Fitur Utama',
+  filosofi: '03 Filosofi',
+  rilis: '04 Rilis',
+  kredit: '05 Kredit',
 };
 
 function clamp(v, lo, hi) {

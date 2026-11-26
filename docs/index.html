@@ -15,7 +15,7 @@
   <meta name="google-site-verification" content="6y-5Cff0WkeBj7_uWju39rv0nQnqmEgw81an57VJkGg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Langkah Kecil" />
@@ -75,33 +75,30 @@
 
   <style>
     :root {
-      --bg: #faf6ee;
+      --bg: #fbfbfd;
       --card: #ffffff;
-      --soft: #f5ecdc;
-      --border: #e2d5c1;
-      --shadow: #eadbc4;
-      --text: #221b15;
-      --muted: #66584b;
-      --terracotta: #d85a26;
-      --rose: #e94d8a;
-      --sage: #257d58;
-      --mono: "JetBrains Mono", Consolas, monospace;
-      --display: "Fredoka", "Nunito", sans-serif;
-      --sans: "Nunito", -apple-system, BlinkMacSystemFont, sans-serif;
+      --soft: #f5f5f7;
+      --hairline: rgba(0, 0, 0, 0.08);
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --rose: #e83e7a;
+      --sage: #1f8a5b;
+      --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+      --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: var(--sans);
-      background-color: var(--bg);
-      background-image: radial-gradient(#d8c8b0 1px, transparent 1px);
-      background-size: 28px 28px;
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.65;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
-    a { color: var(--terracotta); font-weight: 700; text-decoration: none; }
+    a { color: var(--rose); font-weight: 500; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     .progress-track {
@@ -109,15 +106,15 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: rgba(34, 27, 21, 0.08);
+      height: 2px;
+      background: transparent;
       z-index: 60;
       pointer-events: none;
     }
     #scroll-progress-bar {
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, var(--rose) 0%, var(--terracotta) 100%);
+      background: var(--rose);
       transform-origin: left center;
       transform: scaleX(0);
     }
@@ -126,64 +123,67 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      background: rgba(250, 246, 238, 0.94);
-      backdrop-filter: blur(8px);
-      border-bottom: 2px solid var(--border);
+      height: 52px;
+      background: rgba(251, 251, 253, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--hairline);
     }
     .topbar-inner {
-      max-width: 1220px;
+      max-width: 1180px;
+      height: 100%;
       margin: 0 auto;
-      padding: 12px 24px;
+      padding: 0 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      font-family: var(--mono);
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
     }
     .brand-mark {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       color: var(--text);
-      font-weight: 700;
-      font-family: var(--display);
-      font-size: 16px;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: -0.01em;
     }
+    .brand-mark:hover { text-decoration: none; }
     .brand-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
       background: var(--rose);
       display: inline-block;
     }
-    .topbar-nav { display: flex; flex-wrap: wrap; gap: 18px; }
-    .topbar-nav a { color: var(--muted); font-family: var(--sans); font-size: 14px; }
+    .topbar-nav { display: flex; flex-wrap: wrap; gap: 24px; }
+    .topbar-nav a { color: var(--muted); font-weight: 500; transition: color 0.15s ease; }
     .topbar-nav a:hover { color: var(--text); text-decoration: none; }
 
-    .wrap { max-width: 1220px; margin: 0 auto; padding: 36px 24px 72px; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 56px 28px 84px; }
     .story-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.12fr) minmax(350px, 0.88fr);
-      gap: 40px;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+      gap: 56px;
       align-items: start;
     }
     .vitrine-col {
       position: sticky;
-      top: 76px;
+      top: 84px;
       order: 2;
     }
     .chapters-col { order: 1; min-width: 0; }
 
     #stage-3d {
       position: relative;
-      height: min(520px, calc(100vh - 115px));
-      min-height: 390px;
-      background: linear-gradient(155deg, #fffdf9 0%, #fff0f5 100%);
-      border: 2px solid var(--border);
-      border-radius: 24px;
-      box-shadow: 6px 6px 0 var(--shadow);
+      height: min(560px, calc(100vh - 120px));
+      min-height: 420px;
+      background: radial-gradient(circle at 50% 45%, #ffffff 0%, #fdf2f6 76%, #f8e6ee 100%);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(232, 62, 122, 0.06);
       overflow: hidden;
       cursor: grab;
       user-select: none;
@@ -192,31 +192,32 @@
     #stage-3d:active { cursor: grabbing; }
     .stage-hud-top {
       position: absolute;
-      top: 18px;
-      left: 20px;
-      right: 20px;
+      top: 20px;
+      left: 22px;
+      right: 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: var(--mono);
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: 500;
       color: var(--muted);
       pointer-events: none;
       z-index: 4;
     }
     #stage-chapter {
-      background: #ffffff;
-      border: 1.5px solid var(--border);
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 0, 0, 0.06);
       color: var(--text);
-      padding: 4px 10px;
-      border-radius: 999px;
+      padding: 4px 12px;
+      border-radius: 980px;
       font-weight: 600;
     }
     .stage-hud-bottom {
       position: absolute;
-      bottom: 16px;
-      left: 20px;
-      right: 20px;
+      bottom: 18px;
+      left: 22px;
+      right: 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -242,109 +243,104 @@
       margin: auto;
       width: 156px;
       height: 156px;
-      border-radius: 20px;
+      border-radius: 24px;
       object-fit: cover;
-      border: 2px solid var(--border);
+      border: 1px solid var(--hairline);
       z-index: 1;
-      transition: opacity 0.45s ease;
     }
     #stage-3d.is-ready .stage-fallback { display: none; }
 
     .chapter {
-      padding-bottom: 48px;
-      margin-bottom: 48px;
-      border-bottom: 2px dashed var(--border);
+      padding-bottom: 64px;
+      margin-bottom: 64px;
+      border-bottom: 1px solid var(--hairline);
     }
     .chapter:last-child {
       border-bottom: none;
-      margin-bottom: 12px;
-      padding-bottom: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
     }
     .eyebrow {
       display: inline-block;
-      font-family: var(--mono);
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 600;
-      color: #8f3913;
-      background: #ffe7ce;
-      border: 1.5px solid #eec095;
-      border-radius: 999px;
-      padding: 4px 14px;
-      margin-bottom: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 12px;
     }
     h1, h2, h3 { font-family: var(--display); }
     h1 {
-      margin: 0 0 12px;
-      font-size: clamp(30px, 4vw, 44px);
-      line-height: 1.12;
-      color: #1f1711;
+      margin: 0 0 16px;
+      font-size: clamp(34px, 4.4vw, 52px);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      color: var(--text);
     }
     .lead {
-      margin: 0 0 20px;
-      color: #463a2f;
-      font-size: 16.5px;
-      max-width: 660px;
+      margin: 0 0 24px;
+      color: #424245;
+      font-size: 17px;
+      line-height: 1.55;
+      max-width: 620px;
     }
-    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-    .pill {
-      font-size: 13px;
-      font-weight: 700;
-      background: var(--soft);
-      border: 1.5px solid var(--border);
-      color: #534232;
-      padding: 5px 12px;
-      border-radius: 999px;
+    .spec-meta {
+      margin: 0 0 26px;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7;
     }
-    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
     .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn {
-      display: inline-block;
-      padding: 11px 20px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 14.5px;
-      border: 2px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      border-radius: 980px;
+      font-weight: 500;
+      font-size: 14px;
+      border: 1px solid transparent;
       color: var(--text);
-      background: var(--card);
-      box-shadow: 3px 3px 0 var(--shadow);
+      background: rgba(0, 0, 0, 0.045);
+      transition: background 0.15s ease;
     }
     .btn.primary {
-      background: var(--terracotta);
-      border-color: #b44214;
+      background: var(--rose);
       color: #ffffff;
-      box-shadow: 3px 3px 0 #b44214;
+      font-weight: 600;
     }
-    .btn:hover { text-decoration: none; transform: translate(-1px, -1px); }
+    .btn:hover { text-decoration: none; background: rgba(0, 0, 0, 0.09); }
+    .btn.primary:hover { background: #d4316b; }
 
     h2 {
-      font-size: 23px;
-      color: #1f1711;
-      margin: 0 0 16px;
-      border-left: 5px solid var(--rose);
-      padding-left: 12px;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin: 0 0 18px;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 16px;
     }
     .card {
       background: var(--card);
-      border: 2px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: 4px 4px 0 var(--shadow);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     }
-    .card h3 { margin: 0 0 8px; font-size: 17px; color: var(--terracotta); }
-    .card p { margin: 0; font-size: 14.5px; color: var(--muted); }
+    .card h3 { margin: 0 0 8px; font-size: 17px; font-weight: 600; letter-spacing: -0.015em; color: var(--text); }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
     .quote-box {
-      background: #edf9f2;
-      border: 2px solid #9fd8b9;
-      border-radius: 18px;
-      padding: 24px 26px;
-      color: #1d4231;
-      font-size: 16.5px;
-      box-shadow: 4px 4px 0 #cdebd9;
+      background: #f2f9f5;
+      border: 1px solid rgba(31, 138, 91, 0.18);
+      border-radius: 24px;
+      padding: 28px 30px;
+      color: #164430;
+      font-size: 17px;
+      line-height: 1.6;
     }
     .release-grid {
       display: grid;
@@ -353,45 +349,45 @@
     }
     .release-card {
       background: var(--card);
-      border: 2px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: 4px 4px 0 var(--shadow);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 24px;
+      padding: 22px 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     }
     .release-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .release-tag {
-      font-weight: 700;
-      font-size: 13.5px;
+      font-family: var(--mono);
+      font-weight: 600;
+      font-size: 12.5px;
       color: #ffffff;
       background: var(--sage);
-      padding: 3px 12px;
-      border-radius: 999px;
+      padding: 3px 11px;
+      border-radius: 980px;
     }
-    .release-date { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+    .release-date { font-family: var(--mono); font-size: 12px; color: var(--muted); }
     .release-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
     .release-card li { margin-bottom: 6px; }
     footer {
       margin-top: 40px;
-      padding-top: 20px;
-      border-top: 2px solid var(--border);
+      padding-top: 24px;
+      border-top: 1px solid var(--hairline);
       color: var(--muted);
-      font-family: var(--mono);
-      font-size: 12px;
+      font-size: 12.5px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 10px;
     }
     @media (max-width: 960px) {
-      .story-grid { grid-template-columns: 1fr; gap: 28px; }
+      .story-grid { grid-template-columns: 1fr; gap: 32px; }
       .vitrine-col { position: relative; top: 0; order: 1; }
       .chapters-col { order: 2; }
-      #stage-3d { height: 340px; min-height: 300px; }
+      #stage-3d { height: 360px; min-height: 300px; }
     }
   </style>
 </head>
@@ -419,19 +415,11 @@
           <p class="lead">
             Aplikasi permainan edukasi yang dirancang khusus untuk <strong>anak-anak berkebutuhan khusus</strong> menggunakan <strong>Godot Engine 4.5</strong>, memadukan pengenalan emosi interaktif, jadwal harian visual, dan umpan balik penuh empati.
           </p>
-          <div class="pill-row">
-            <span class="pill">Godot Engine 4.5</span>
-            <span class="pill">6 Modul Emosi Interaktif</span>
-            <span class="pill">Jadwal Pagi, Siang/Sore &amp; Malam</span>
-            <span class="pill">Android 7+ APK &amp; Desktop</span>
-          </div>
-          <div class="badge-row">
-            <a href="https://github.com/radityobw/langkah-kecil/releases/latest"><img src="https://img.shields.io/github/v/release/radityobw/langkah-kecil?label=Release&color=ea7a2e&cacheSeconds=3600" alt="GitHub Release" /></a>
-            <a href="https://github.com/radityobw/langkah-kecil/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/radityobw/langkah-kecil/ci.yml?label=CI&color=2f9e6b" alt="CI Status" /></a>
-            <a href="https://github.com/radityobw/langkah-kecil/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg" alt="License CC BY-NC 4.0" /></a>
-          </div>
+          <p class="spec-meta">
+            Godot Engine 4.5  ·  6 Modul Emosi Interaktif  ·  Jadwal Pagi, Siang/Sore &amp; Malam  ·  Android 7+ APK &amp; Desktop
+          </p>
           <div class="cta-row">
-            <a class="btn primary" href="https://github.com/radityobw/langkah-kecil/releases/latest">Unduh APK (GitHub Releases)</a>
+            <a class="btn primary" href="https://github.com/radityobw/langkah-kecil/releases/latest">Unduh APK (Releases)</a>
             <a class="btn" href="https://github.com/radityobw/langkah-kecil">Repositori GitHub</a>
             <a class="btn" href="https://github.com/radityobw/langkah-kecil/blob/main/CREDITS.md">Kredit &amp; Aset</a>
           </div>
@@ -467,7 +455,7 @@
         </section>
 
         <section class="chapter" data-chapter="rilis" id="sec-rilis">
-          <h2>Rilis Terbaru (Tersinkron Otomatis dari CHANGELOG.md)</h2>
+          <h2>Rilis Terbaru</h2>
           <div class="release-grid">
             <!-- AUTO_CHANGELOG_START -->
             <article class="release-card">
@@ -498,21 +486,21 @@
       <aside class="vitrine-col" aria-label="Panggung 3D Emblem Langkah Kecil">
         <div id="stage-3d">
           <div class="stage-hud-top">
-            <span id="stage-chapter">01 / PENGENALAN</span>
-            <span>GESER UNTUK MEMUTAR</span>
+            <span id="stage-chapter">01 Pengenalan</span>
+            <span>Geser untuk memutar</span>
           </div>
           <img class="stage-fallback" src="logo.jpeg" alt="Ikon Langkah Kecil" width="156" height="156" />
           <canvas id="canvas-3d" aria-label="Model 3D Emblem Langkah Kecil"></canvas>
           <div class="stage-hud-bottom">
             <span>langkah-kecil.glb</span>
-            <span>INTERACTIVE 3D BLOCK</span>
+            <span>Interactive 3D block</span>
           </div>
         </div>
       </aside>
     </div>
 
     <footer>
-      <span>Langkah Kecil - Godot 4.5 - Custom CC BY-NC 4.0 - <!-- AUTO_UPDATED_START -->Updated 2026-11-25<!-- AUTO_UPDATED_END --></span>
+      <span>Langkah Kecil · Godot 4.5 · Custom CC BY-NC 4.0 · <!-- AUTO_UPDATED_START -->Updated 2026-11-25<!-- AUTO_UPDATED_END --></span>
       <span><a href="https://github.com/radityobw/langkah-kecil">GitHub</a> | <a href="https://github.com/radityobw/langkah-kecil/releases">Releases</a> | <a href="https://github.com/radityobw/langkah-kecil/blob/main/CHANGELOG.md">Changelog</a> | <a href="https://github.com/radityobw/langkah-kecil/blob/main/CREDITS.md">Credits</a></span>
     </footer>
   </div>
